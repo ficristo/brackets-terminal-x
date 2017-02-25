@@ -1,0 +1,14 @@
+#terminal-container .terminal.xterm {
+    height: 100%;
+}
+
+/*
+#terminal-container .xterm-viewport {
+    height: 100% !important;
+}
+*/
+
+#terminal-icon {
+    content: "";
+    background: url("logoShell.svg") 0 0 no-repeat;
+}

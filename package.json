@@ -1,0 +1,34 @@
+{
+  "name": "brackets-terminal-x",
+  "title": "Brackets Terminal X",
+  "version": "0.1.0",
+  "description": "EXPERIMENTAL: Integrates a terminal",
+  "main": "main.js",
+  "homepage": "https://github.com/ficristo/brackets-terminal-x",
+  "repository": "https://github.com/ficristo/brackets-terminal-x",
+  "keywords": [
+    "brackets",
+    "brackets-extension",
+    "terminal",
+    "xterm",
+    "node-pty"
+  ],
+  "author": "ficristo",
+  "license": "MIT",
+  "engines": {
+    "brackets": "^1.8.0"
+  },
+  "scripts": {
+    "lint:js": "eslint . --ignore-path .gitignore",
+    "lint": "npm run lint:js",
+    "test": "npm run lint"
+  },
+  "dependencies": {
+    "node-pty": "0.6.2",
+    "ws": "1.1.2",
+    "xterm": "^2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1"
+  }
+}

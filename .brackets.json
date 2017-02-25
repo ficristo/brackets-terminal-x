@@ -1,0 +1,16 @@
+{
+    "defaultExtension": "js",
+    "language": {
+        "javascript": {
+            "linting.prefer": ["ESLint"],
+            "linting.usePreferredOnly": true
+        }
+    },
+    "path": {
+        "package.json": {
+            "spaceUnits": 2
+        }
+    },
+    "spaceUnits": 4,
+    "useTabChar": false
+}
