@@ -36,7 +36,7 @@ To run it you should clone their repository and follow their [instructions](http
     "brackets-terminal-x.port": 8080,
     // Other examples:
     // - C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
-    // - C:\\Program Files\\Git\\bin\\bash.exe |
+    // - C:\\Program Files\\Git\\bin\\bash.exe
     "brackets-terminal-x.shellPathWin": "C:\\Windows\\system32\\cmd.exe",
     "brackets-terminal-x.shellPathUnix": "bash",
     "brackets-terminal-x.shellPath": ""
