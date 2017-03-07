@@ -15,7 +15,7 @@ function cmdCreateTerminal(options, cb) {
     var shell = options.shellPath || shellPath;
     var args = options.shellArgs || [];
     var term = pty.spawn(shell, args, {
-        name: "xterm-color",
+        name: "xterm-256color",
         cols: options.cols || 80,
         rows: options.rows || 24,
         cwd: options.projectRoot || process.env.PWD,
