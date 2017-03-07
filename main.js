@@ -24,6 +24,13 @@ define(function (require, exports, module) {
         }
     }
 
+    function getProjectPath() {
+        if (ProjectManager.getProjectRoot()) {
+            return ProjectManager.getProjectRoot().fullPath;
+        }
+        return "";
+    }
+
     AppInit.htmlReady(function () {
         ExtensionUtils.loadStyleSheet(module, "node_modules/xterm/dist/xterm.css");
         ExtensionUtils.loadStyleSheet(module, "src/styles/style.css");
@@ -32,7 +39,7 @@ define(function (require, exports, module) {
             var options = {
                 cols: null,
                 rows: null,
-                projectRoot: ProjectManager.getProjectRoot().fullPath,
+                projectRoot: getProjectPath(),
                 shellPath: Preferences.getShellPath()
             };
             manager.createTerminal(options);
