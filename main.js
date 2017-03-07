@@ -36,11 +36,13 @@ define(function (require, exports, module) {
         ExtensionUtils.loadStyleSheet(module, "src/styles/style.css");
         manager.startConnection(Preferences.getPort());
         manager.on("connected", function (event) {
+            var shellPrefs = Preferences.getShell();
             var options = {
                 cols: null,
                 rows: null,
                 projectRoot: getProjectPath(),
-                shellPath: Preferences.getShellPath()
+                shellPath: shellPrefs.shellPath,
+                shellArgs: shellPrefs.shellArgs
             };
             manager.createTerminal(options);
         });

@@ -16,47 +16,90 @@ define(function (require, exports, module) {
         }
     );
     prefs.definePreference(
-        "shellPathWin",
+        "shell.windows",
         "string",
-        "C:\\Windows\\system32\\cmd.exe",
+        "C:\\Windows\\sysnative\\cmd.exe",
         {
             name: "Path to the shell used on Windows",
             /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_WIN*/
         }
     );
     prefs.definePreference(
-        "shellPathUnix",
-        "string",
-        "bash",
+        "shellArgs.windows",
+        "array",
+        [],
         {
-            name: "Path to the shell used on Unix platforms",
+            name: "Arguments to pass to the shell when launched on Windows",
+            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_WIN*/
+        }
+    );
+    prefs.definePreference(
+        "shell.mac",
+        "string",
+        "/bin/bash",
+        {
+            name: "Path to the shell used on macOS",
+            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH*/
+        }
+    );
+    prefs.definePreference(
+        "shellArgs.mac",
+        "array",
+        [],
+        {
+            name: "Arguments to pass to the shell when launched on macOS",
+            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH*/
+        }
+    );
+    prefs.definePreference(
+        "shell.linux",
+        "string",
+        "/bin/bash",
+        {
+            name: "Path to the shell used on Linux",
             /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_UNIX*/
         }
     );
     prefs.definePreference(
-        "shellPath",
-        "string",
-        "",
+        "shellArgs.linux",
+        "array",
+        [],
         {
-            name: "If defined supercedes the other shellPathWin and shellPathUnix values",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH*/
+            name: "Arguments to pass to the shell when launched on Linux",
+            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_UNIX*/
         }
     );
 
-    function getShellPath() {
-        var shellPath = prefs.get("shellPath");
-        if (brackets.platform === "win") {
-            shellPath = shellPath || prefs.get("shellPathWin");
-        } else {
-            shellPath = shellPath || prefs.get("shellPathUnix");
+    var shell = {
+        win: {
+            shellPath: "shell.windows",
+            shellArgs: "shellArgs.windows"
+        },
+        mac: {
+            shellPath: "shell.mac",
+            shellArgs: "shellArgs.mac"
+        },
+        linux: {
+            shellPath: "shell.linux",
+            shellArgs: "shellArgs.linux"
         }
-        return shellPath;
+    };
+
+    function getShell() {
+        var config = shell[brackets.platform];
+        var params = {};
+        for (var key in config) {
+            if (config.hasOwnProperty(key)) {
+                params[key] = prefs.get(config[key]);
+            }
+        }
+        return params;
     }
 
     function getPort() {
         return prefs.get("port") || 8080;
     }
 
-    exports.getShellPath = getShellPath;
+    exports.getShell = getShell;
     exports.getPort = getPort;
 });

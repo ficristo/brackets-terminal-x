@@ -13,7 +13,8 @@ var url = require("url"),
 
 function cmdCreateTerminal(options, cb) {
     var shell = options.shellPath || shellPath;
-    var term = pty.spawn(shell, [], {
+    var args = options.shellArgs || [];
+    var term = pty.spawn(shell, args, {
         name: "xterm-color",
         cols: options.cols || 80,
         rows: options.rows || 24,
