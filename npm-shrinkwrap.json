@@ -1,0 +1,31 @@
+{
+  "name": "brackets-terminal-x",
+  "version": "0.1.0",
+  "dependencies": {
+    "nan": {
+      "version": "2.5.0",
+      "from": "nan@2.5.0",
+      "resolved": "https://registry.npmjs.org/nan/-/nan-2.5.0.tgz"
+    },
+    "node-pty": {
+      "version": "0.6.2",
+      "from": "node-pty@0.6.2",
+      "resolved": "https://registry.npmjs.org/node-pty/-/node-pty-0.6.2.tgz"
+    },
+    "ultron": {
+      "version": "1.1.0",
+      "from": "ultron@>=1.1.0 <1.2.0",
+      "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.1.0.tgz"
+    },
+    "ws": {
+      "version": "2.2.0",
+      "from": "ws@2.2.0",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-2.2.0.tgz"
+    },
+    "xterm": {
+      "version": "2.4.0",
+      "from": "xterm@2.4.0",
+      "resolved": "https://registry.npmjs.org/xterm/-/xterm-2.4.0.tgz"
+    }
+  }
+}

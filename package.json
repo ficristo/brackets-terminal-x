@@ -25,10 +25,10 @@
   },
   "dependencies": {
     "node-pty": "0.6.2",
-    "ws": "1.1.2",
-    "xterm": "^2.3.2"
+    "ws": "2.2.0",
+    "xterm": "2.4.0"
   },
   "devDependencies": {
-    "eslint": "^3.16.1"
+    "eslint": "3.17.1"
   }
 }
