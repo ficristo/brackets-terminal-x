@@ -35,11 +35,14 @@ To run it you should clone their repository and follow their [instructions](http
 {
     "brackets-terminal-x.port": 8080,
     // Other examples:
-    // - C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
+    // - C:\\Windows\\sysnative\\WindowsPowerShell\\v1.0\\powershell.exe
     // - C:\\Program Files\\Git\\bin\\bash.exe
-    "brackets-terminal-x.shellPathWin": "C:\\Windows\\system32\\cmd.exe",
-    "brackets-terminal-x.shellPathUnix": "bash",
-    "brackets-terminal-x.shellPath": ""
+    "brackets-terminal-x.shell.windows": "C:\\Windows\\sysnative\\cmd.exe",
+    "brackets-terminal-x.shellArgs.windows": [],
+    "brackets-terminal-x.shell.mac": "/bin/bash",
+    "brackets-terminal-x.shellArgs.mac": [],
+    "brackets-terminal-x.shell.linux": "/bin/bash",
+    "brackets-terminal-x.shellArgs.linux": []
 }
 ```
 
