@@ -34,6 +34,9 @@ define(function (require, exports, module) {
     AppInit.htmlReady(function () {
         ExtensionUtils.loadStyleSheet(module, "node_modules/xterm/dist/xterm.css");
         ExtensionUtils.loadStyleSheet(module, "src/styles/style.css");
+    });
+
+    AppInit.appReady(function () {
         manager.startConnection(Preferences.getPort());
         manager.on("connected", function (event) {
             var shellPrefs = Preferences.getShell();
