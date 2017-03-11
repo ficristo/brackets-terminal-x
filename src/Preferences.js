@@ -2,7 +2,7 @@ define(function (require, exports, module) {
     "use strict";
 
     var PreferencesManager = brackets.getModule("preferences/PreferencesManager"),
-        // Strings            = brackets.getModule("strings"),
+        Strings            = require("src/strings"),
         prefs              = PreferencesManager.getExtensionPrefs("brackets-terminal-x");
 
     // Default preference values.
@@ -12,7 +12,7 @@ define(function (require, exports, module) {
         "8080",
         {
             name: "The port where listen terminal events",
-            /*description: Strings.DESCRIPTION_TERMINAL_PORT*/
+            description: Strings.DESCRIPTION_TERMINAL_PORT
         }
     );
     prefs.definePreference(
@@ -21,7 +21,7 @@ define(function (require, exports, module) {
         "C:\\Windows\\sysnative\\cmd.exe",
         {
             name: "Path to the shell used on Windows",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_WIN*/
+            description: Strings.DESCRIPTION_TERMINAL_SHELL_WINDOWS
         }
     );
     prefs.definePreference(
@@ -30,7 +30,7 @@ define(function (require, exports, module) {
         [],
         {
             name: "Arguments to pass to the shell when launched on Windows",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_WIN*/
+            description: Strings.DESCRIPTION_TERMINAL_SHELLARGS_WINDOWS
         }
     );
     prefs.definePreference(
@@ -39,7 +39,7 @@ define(function (require, exports, module) {
         "/bin/bash",
         {
             name: "Path to the shell used on macOS",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH*/
+            description: Strings.DESCRIPTION_TERMINAL_SHELL_MAC
         }
     );
     prefs.definePreference(
@@ -48,7 +48,7 @@ define(function (require, exports, module) {
         [],
         {
             name: "Arguments to pass to the shell when launched on macOS",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH*/
+            description: Strings.DESCRIPTION_TERMINAL_SHELLARGS_MAC
         }
     );
     prefs.definePreference(
@@ -57,7 +57,7 @@ define(function (require, exports, module) {
         "/bin/bash",
         {
             name: "Path to the shell used on Linux",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_UNIX*/
+            description: Strings.DESCRIPTION_TERMINAL_SHELL_LINUX
         }
     );
     prefs.definePreference(
@@ -66,7 +66,7 @@ define(function (require, exports, module) {
         [],
         {
             name: "Arguments to pass to the shell when launched on Linux",
-            /*description: Strings.DESCRIPTION_TERMINAL_SHELL_PATH_UNIX*/
+            description: Strings.DESCRIPTION_TERMINAL_SHELLARGS_LINUX
         }
     );
 
