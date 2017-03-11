@@ -19,6 +19,7 @@ define(function (require, exports, module) {
 
     Manager.prototype._port = undefined;
     Manager.prototype._terminals = {};
+    Manager.prototype._currentTermId = null;
 
     Manager.prototype.startConnection = function (port) {
         var self = this;
@@ -58,6 +59,7 @@ define(function (require, exports, module) {
                 cursorBlink: true
             });
         self._terminals[terminalId] = term;
+        self._currentTermId = terminalId;
 
         term.on("resize", function (size) {
             var cols = size.cols,
@@ -102,6 +104,13 @@ define(function (require, exports, module) {
         var self = this,
             term = self._terminals[terminalId];
         return term.element;
+    };
+
+    Manager.prototype.goto = function (path) {
+        var self = this,
+            term = self._terminals[self._currentTermId];
+        var eol = brackets.platform === "win" ? "\r\n" : "\n";
+        term.send("cd \"" + path + "\"" + eol);
     };
 
     var manager = new Manager();

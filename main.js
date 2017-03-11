@@ -66,5 +66,12 @@ define(function (require, exports, module) {
         $content.on("click", ".close", function () {
             panel.hide();
         });
+
+        ProjectManager.on("projectOpen", function () {
+            var projectPath = getProjectPath();
+            if (projectPath) {
+                manager.goto(projectPath);
+            }
+        });
     });
 });
