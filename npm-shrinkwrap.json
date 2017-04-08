@@ -23,9 +23,9 @@
       "resolved": "https://registry.npmjs.org/ws/-/ws-2.2.0.tgz"
     },
     "xterm": {
-      "version": "2.4.0",
-      "from": "xterm@2.4.0",
-      "resolved": "https://registry.npmjs.org/xterm/-/xterm-2.4.0.tgz"
+      "version": "2.5.0",
+      "from": "xterm@2.5.0",
+      "resolved": "https://registry.npmjs.org/xterm/-/xterm-2.5.0.tgz"
     }
   }
 }
