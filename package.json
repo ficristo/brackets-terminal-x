@@ -29,6 +29,6 @@
     "xterm": "2.4.0"
   },
   "devDependencies": {
-    "eslint": "3.17.1"
+    "eslint": "3.19.0"
   }
 }
