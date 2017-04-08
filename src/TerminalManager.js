@@ -100,6 +100,16 @@ define(function (require, exports, module) {
         }
     };
 
+    Manager.prototype.resizeAll = function (terminalId, cols, rows) {
+        var self = this;
+        for (var terminalId in self._terminals) {
+            if (self._terminals.hasOwnProperty(terminalId)) {
+                var term = self._terminals[terminalId];
+                term.fit();
+            }
+        }
+    };
+
     Manager.prototype.getElement = function (terminalId) {
         var self = this,
             term = self._terminals[terminalId];
@@ -110,7 +120,7 @@ define(function (require, exports, module) {
         var self = this,
             term = self._terminals[self._currentTermId];
         var eol = brackets.platform === "win" ? "\r\n" : "\n";
-        term.send("cd \"" + path + "\"" + eol);
+        term.socket.send("cd \"" + path + "\"" + eol);
     };
 
     var manager = new Manager();

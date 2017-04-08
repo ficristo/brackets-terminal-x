@@ -73,5 +73,9 @@ define(function (require, exports, module) {
                 manager.goto(projectPath);
             }
         });
+
+        WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_UPDATE_LAYOUT, function () {
+            manager.resizeAll();
+        });
     });
 });
