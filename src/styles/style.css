@@ -1,3 +1,8 @@
+#brackets-terminal-x {
+    -webkit-user-select: auto;
+    user-select: auto;
+}
+
 #terminal-container .terminal.xterm {
     height: 100%;
 }
