@@ -3,6 +3,35 @@
     user-select: auto;
 }
 
+#brackets-terminal-x .toolbar .btn {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#brackets-terminal-x .toolbar .btn.first {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    margin-right: 0;
+}
+
+#brackets-terminal-x .toolbar .btn.middle {
+    border-radius: 0;
+    border-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#brackets-terminal-x .toolbar .btn.last {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: 0;
+}
+
+#brackets-terminal-x .toolbar .title {
+    margin-left: 10px;
+}
+
 #terminal-container .terminal.xterm {
     height: 100%;
 }

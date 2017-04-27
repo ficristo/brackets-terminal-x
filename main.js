@@ -9,9 +9,11 @@ define(function (require, exports, module) {
         manager = require("src/TerminalManager"),
         toolbar = require("src/ToolbarManager"),
         Preferences = require("src/Preferences"),
+        Strings = require("src/strings"),
         terminalHtml = require("text!src/views/terminal.html");
 
     var content = Mustache.render(terminalHtml, {
+        Strings: Strings
     });
     var $content = $(content);
     var panel = WorkspaceManager.createBottomPanel("brackets-terminal-x", $content, 100);
@@ -34,6 +36,15 @@ define(function (require, exports, module) {
     AppInit.htmlReady(function () {
         ExtensionUtils.loadStyleSheet(module, "node_modules/xterm/dist/xterm.css");
         ExtensionUtils.loadStyleSheet(module, "src/styles/style.css");
+        $content.find("#clear").on("click", function () {
+            manager.clear();
+        });
+        $content.find("#cdCurrentProject").on("click", function () {
+            var projectPath = getProjectPath();
+            if (projectPath) {
+                manager.goto(projectPath);
+            }
+        });
     });
 
     AppInit.appReady(function () {

@@ -123,6 +123,12 @@ define(function (require, exports, module) {
         term.socket.send("cd \"" + path + "\"" + eol);
     };
 
+    Manager.prototype.clear = function () {
+        var self = this,
+            term = self._terminals[self._currentTermId];
+        term.clear();
+    };
+
     var manager = new Manager();
     module.exports = manager;
 });
