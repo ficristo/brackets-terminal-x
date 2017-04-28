@@ -10,9 +10,9 @@ define(function (require, exports, module) {
         toolbar = require("src/ToolbarManager"),
         Preferences = require("src/Preferences"),
         Strings = require("src/strings"),
-        terminalHtml = require("text!src/views/terminal.html");
+        terminalsPanelHtml = require("text!src/views/terminals-panel.html");
 
-    var content = Mustache.render(terminalHtml, {
+    var content = Mustache.render(terminalsPanelHtml, {
         Strings: Strings
     });
     var $content = $(content);
