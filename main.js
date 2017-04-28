@@ -61,12 +61,12 @@ define(function (require, exports, module) {
             manager.createTerminal(options);
         });
         manager.on("created", function (event, terminalId) {
-            var $terminal = $content.find("#terminal-container");
+            var $terminalsContainer = $content.find("#terminals-container");
             var $panel = panel.$panel;
             $panel.on("panelResizeEnd", function () {
                 manager.resize(terminalId);
             });
-            manager.open($terminal.get()[0], terminalId);
+            manager.open($terminalsContainer.get()[0], terminalId);
             handleAction();
         });
 
