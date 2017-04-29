@@ -12,13 +12,14 @@ define(function (require, exports, module) {
         Strings = require("src/strings"),
         terminalsPanelHtml = require("text!src/views/terminals-panel.html"),
         terminalHeaderHtml = require("text!src/views/terminal-header.html"),
-        terminalContentHtml = require("text!src/views/terminal-content.html");
+        terminalContentHtml = require("text!src/views/terminal-content.html"),
+        PANEL_ID = "brackets-terminal-x";
 
     var content = Mustache.render(terminalsPanelHtml, {
         Strings: Strings
     });
     var $content = $(content);
-    var panel = WorkspaceManager.createBottomPanel("brackets-terminal-x", $content, 100);
+    var panel = WorkspaceManager.createBottomPanel(PANEL_ID, $content, 100);
 
     function handleAction() {
         if (panel.isVisible()) {
@@ -61,14 +62,23 @@ define(function (require, exports, module) {
                 shellArgs: shellPrefs.shellArgs
             };
             manager.createTerminal(options);
+
+            $content.find(".nav-tabs .add-tab .add-terminal")
+                .on("click", function () {
+                    manager.createTerminal(options);
+                });
         });
         manager.on("created", function (event, terminalId) {
-            var $navTabs = $content.find(".nav-tabs");
             var header = Mustache.render(terminalHeaderHtml, {
                 id: terminalId,
                 title: "Terminal"
             });
-            $navTabs.append(header);
+            var $header = $(header);
+
+            $("#brackets-terminal-x .nav-container .nav-tabs li").removeClass("active");
+
+            $header.addClass("active");
+            $header.insertBefore("#brackets-terminal-x .nav-tabs .add-tab");
 
             var html = Mustache.render(terminalContentHtml, {
                 id: terminalId
@@ -84,8 +94,6 @@ define(function (require, exports, module) {
             $panel.on("panelResizeEnd", function () {
                 manager.resize(terminalId);
             });
-
-            handleAction();
         });
         manager.on("title", function (event, terminalId, title) {
             var header = $content.find("a[href='#" + terminalId + "'] > p:first-child");
@@ -108,9 +116,25 @@ define(function (require, exports, module) {
             }
         });
 
+        var prefs = Preferences.prefs;
+        if (!prefs.get("collapsed")) {
+            panel.show();
+        }
+
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_UPDATE_LAYOUT, function (event, editorAreaHeight) {
             if (editorAreaHeight > 0) {
                 manager.resizeAll();
+            }
+        });
+
+        WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_PANEL_SHOWN, function (event, panelId) {
+            if (panelId === PANEL_ID) {
+                prefs.set("collapsed", false);
+            }
+        });
+        WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_PANEL_HIDDEN, function (event, panelId) {
+            if (panelId === PANEL_ID) {
+                prefs.set("collapsed", true);
             }
         });
     });

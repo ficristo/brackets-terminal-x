@@ -38,6 +38,10 @@
     margin: 0;
 }
 
+#brackets-terminal-x .toolbar .nav-container .nav.nav-tabs .add-tab {
+    width: auto;
+}
+
 #brackets-terminal-x .toolbar li {
     width: 120px;
 }
