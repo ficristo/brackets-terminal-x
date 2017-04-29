@@ -71,7 +71,7 @@ define(function (require, exports, module) {
         manager.on("created", function (event, terminalId) {
             var header = Mustache.render(terminalHeaderHtml, {
                 id: terminalId,
-                title: "Terminal"
+                title: Strings.DEFAULT_TITLE
             });
             var $header = $(header);
 
@@ -96,6 +96,7 @@ define(function (require, exports, module) {
             });
         });
         manager.on("title", function (event, terminalId, title) {
+            title = title.trim() || Strings.DEFAULT_TITLE;
             var header = $content.find("a[href='#" + terminalId + "'] > p:first-child");
             header.text(title);
             header.prop("title", title);

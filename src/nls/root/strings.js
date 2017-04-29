@@ -8,5 +8,7 @@ define({
     "DESCRIPTION_TERMINAL_SHELLARGS_LINUX": "Arguments to pass to the shell when launched on Linux",
 
     "CMD_CLEAR": "Clear current terminal",
-    "CMD_CD_CURRENT_PROJECT": "`cd` root current project"
+    "CMD_CD_CURRENT_PROJECT": "`cd` root current project",
+
+    "DEFAULT_TITLE": "Terminal"
 });
