@@ -70,6 +70,16 @@ define(function (require, exports, module) {
         }
     );
 
+    prefs.definePreference(
+        "collapsed",
+        "boolean",
+        false,
+        {
+            name: "Panel collapsed",
+            description: Strings.DESCRIPTION_PANEL_COLLAPSED
+        }
+    );
+
     var shell = {
         win: {
             shellPath: "shell.windows",
@@ -102,4 +112,5 @@ define(function (require, exports, module) {
 
     exports.getShell = getShell;
     exports.getPort = getPort;
+    exports.prefs = prefs;
 });

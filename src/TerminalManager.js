@@ -67,6 +67,10 @@ define(function (require, exports, module) {
 
             terminalsDomain.exec("resize", terminalId, cols, rows);
         });
+
+        term.on("title", function (title) {
+            self.trigger("title", terminalId, title);
+        });
     };
 
     Manager.prototype.open = function (element, termId) {
@@ -127,6 +131,12 @@ define(function (require, exports, module) {
         var self = this,
             term = self._terminals[self._currentTermId];
         term.clear();
+    };
+
+    Manager.prototype.close = function (terminalId) {
+        var self = this,
+            term = self._terminals[terminalId];
+        term.destroy();
     };
 
     var manager = new Manager();
