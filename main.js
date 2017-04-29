@@ -10,7 +10,9 @@ define(function (require, exports, module) {
         toolbar = require("src/ToolbarManager"),
         Preferences = require("src/Preferences"),
         Strings = require("src/strings"),
-        terminalsPanelHtml = require("text!src/views/terminals-panel.html");
+        terminalsPanelHtml = require("text!src/views/terminals-panel.html"),
+        terminalHeaderHtml = require("text!src/views/terminal-header.html"),
+        terminalContentHtml = require("text!src/views/terminal-content.html");
 
     var content = Mustache.render(terminalsPanelHtml, {
         Strings: Strings
@@ -61,20 +63,41 @@ define(function (require, exports, module) {
             manager.createTerminal(options);
         });
         manager.on("created", function (event, terminalId) {
+            var $navTabs = $content.find(".nav-tabs");
+            var header = Mustache.render(terminalHeaderHtml, {
+                id: terminalId,
+                title: "Terminal"
+            });
+            $navTabs.append(header);
+
+            var html = Mustache.render(terminalContentHtml, {
+                id: terminalId
+            });
+
+            var $html = $(html);
+            manager.open($html.get()[0], terminalId);
+
             var $terminalsContainer = $content.find("#terminals-container");
+            $terminalsContainer.append($html);
+
             var $panel = panel.$panel;
             $panel.on("panelResizeEnd", function () {
                 manager.resize(terminalId);
             });
-            manager.open($terminalsContainer.get()[0], terminalId);
+
             handleAction();
+        });
+        manager.on("title", function (event, terminalId, title) {
+            var header = $content.find("a[href='#" + terminalId + "'] > p:first-child");
+            header.text(title);
+            header.prop("title", title);
         });
 
         toolbar.createIcon();
         toolbar.on("clicked", function () {
             handleAction();
         });
-        $content.on("click", ".close", function () {
+        $content.on("click", ".toolbar > a.close", function () {
             panel.hide();
         });
 

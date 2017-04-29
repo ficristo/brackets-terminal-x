@@ -67,6 +67,10 @@ define(function (require, exports, module) {
 
             terminalsDomain.exec("resize", terminalId, cols, rows);
         });
+
+        term.on("title", function (title) {
+            self.trigger("title", terminalId, title);
+        });
     };
 
     Manager.prototype.open = function (element, termId) {
