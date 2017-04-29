@@ -38,6 +38,10 @@
     margin: 0;
 }
 
+#brackets-terminal-x .toolbar .nav-container .nav.nav-tabs .close {
+    display: none;
+}
+
 #brackets-terminal-x .toolbar .nav-container .nav.nav-tabs .add-tab {
     width: auto;
 }

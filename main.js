@@ -76,8 +76,8 @@ define(function (require, exports, module) {
             var $header = $(header);
             var $terminalsContainer = $content.find("#terminals-container");
 
-            $("#brackets-terminal-x .nav-container .nav-tabs li").removeClass("active");
-            $("#brackets-terminal-x .tab-pane").removeClass("active");
+            $content.find(".nav-container .nav-tabs li").removeClass("active");
+            $content.find(".tab-pane").removeClass("active");
 
             $header.addClass("active");
             $header.find(".close").on("click", function () {
@@ -90,6 +90,11 @@ define(function (require, exports, module) {
                 sibling.find("a").click();
                 elem.remove();
                 $terminalsContainer.find("#" + terminalId).remove();
+
+                // Check for 2 because there is also the add-tab
+                if ($content.find(".nav-container .nav-tabs li").size() === 2) {
+                    $content.find(".nav-container .nav-tabs li .close").css("display", "none");
+                }
             });
             $header.insertBefore("#brackets-terminal-x .nav-tabs .add-tab");
 
@@ -102,6 +107,11 @@ define(function (require, exports, module) {
             manager.open($html.get()[0], terminalId);
 
             $terminalsContainer.append($html);
+
+            // Check for 2 because there is also the add-tab
+            if ($content.find(".nav-container .nav-tabs li").size() > 2) {
+                $content.find(".nav-container .nav-tabs li .close").css("display", "block");
+            }
 
             var $panel = panel.$panel;
             $panel.on("panelResizeEnd", function () {
