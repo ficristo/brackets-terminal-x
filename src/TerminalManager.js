@@ -133,6 +133,12 @@ define(function (require, exports, module) {
         term.clear();
     };
 
+    Manager.prototype.close = function (terminalId) {
+        var self = this,
+            term = self._terminals[terminalId];
+        term.destroy();
+    };
+
     var manager = new Manager();
     module.exports = manager;
 });

@@ -74,10 +74,23 @@ define(function (require, exports, module) {
                 title: Strings.DEFAULT_TITLE
             });
             var $header = $(header);
+            var $terminalsContainer = $content.find("#terminals-container");
 
             $("#brackets-terminal-x .nav-container .nav-tabs li").removeClass("active");
+            $("#brackets-terminal-x .tab-pane").removeClass("active");
 
             $header.addClass("active");
+            $header.find(".close").on("click", function () {
+                // eslint-disable-next-line no-invalid-this
+                var $this = $(this);
+
+                manager.close(terminalId);
+                var elem = $this.closest("li");
+                var sibling = elem.prev().size() !== 0 ? elem.prev() : elem.next();
+                sibling.find("a").click();
+                elem.remove();
+                $terminalsContainer.find("#" + terminalId).remove();
+            });
             $header.insertBefore("#brackets-terminal-x .nav-tabs .add-tab");
 
             var html = Mustache.render(terminalContentHtml, {
@@ -85,9 +98,9 @@ define(function (require, exports, module) {
             });
 
             var $html = $(html);
+            $html.addClass("active");
             manager.open($html.get()[0], terminalId);
 
-            var $terminalsContainer = $content.find("#terminals-container");
             $terminalsContainer.append($html);
 
             var $panel = panel.$panel;
