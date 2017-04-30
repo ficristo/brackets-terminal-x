@@ -22,7 +22,9 @@
     "lint:js": "eslint . --ignore-path .gitignore",
     "lint": "npm run lint:js",
     "prepush": "npm run test",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "preversion": "npm run test",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "node-pty": "0.6.3",
