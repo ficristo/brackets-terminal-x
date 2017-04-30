@@ -1,3 +1,12 @@
+## v0.4.0 (2017-04-30)
+
+Support multiple terminals.
+
+Add buttons to clear current terminal and cd root project.
+
+Enabled text selection.
+
+
 ## v0.3.0 (2017-04-18)
 
 Resize the terminal also on window resize.
