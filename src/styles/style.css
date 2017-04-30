@@ -35,6 +35,7 @@
 }
 
 #brackets-terminal-x .toolbar .nav-container .nav.nav-tabs {
+    border-bottom: none;
     margin: 0;
 }
 
