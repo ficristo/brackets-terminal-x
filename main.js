@@ -49,6 +49,11 @@ define(function (require, exports, module) {
                 manager.goto(projectPath);
             }
         });
+
+        toolbar.createIcon();
+        toolbar.on("clicked", function () {
+            handleAction();
+        });
     });
 
     AppInit.appReady(function () {
@@ -133,10 +138,6 @@ define(function (require, exports, module) {
             header.prop("title", title);
         });
 
-        toolbar.createIcon();
-        toolbar.on("clicked", function () {
-            handleAction();
-        });
         $content.on("click", ".toolbar > a.close", function () {
             panel.hide();
         });
