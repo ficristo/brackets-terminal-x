@@ -139,6 +139,11 @@ define(function (require, exports, module) {
         term.destroy();
     };
 
+    Manager.prototype.setCurrentTab = function (termId) {
+        var self = this;
+        self._currentTermId = termId;
+    };
+
     var manager = new Manager();
     module.exports = manager;
 });

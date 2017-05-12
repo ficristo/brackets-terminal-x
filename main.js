@@ -114,6 +114,13 @@ define(function (require, exports, module) {
                 $content.find(".nav-container .nav-tabs li .close").css("display", "block");
             }
 
+            $content.find(".nav-container .nav-tabs a[data-toggle='tab']")
+                .on("shown", function (e) {
+                    var href = $(e.target).attr("href");
+                    var termId = href.replace(/^#/, "");
+                    manager.setCurrentTab(termId);
+                });
+
             var $panel = panel.$panel;
             $panel.on("panelResizeEnd", function () {
                 manager.resize(terminalId);
