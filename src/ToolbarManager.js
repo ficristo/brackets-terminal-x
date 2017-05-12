@@ -15,7 +15,7 @@ define(function (require, exports, module) {
         var content = Mustache.render(terminalIconHtml, {
         });
         $(content).appendTo($("#main-toolbar .buttons"));
-        this._$icon = $("#terminal-icon");
+        this._$icon = $("#brackets-terminal-x-icon");
         this._$icon.on("click", function () {
             self.trigger("clicked");
         });

@@ -82,7 +82,7 @@
     height: 100%;
 }
 
-#terminal-icon {
+#brackets-terminal-x-icon {
     content: "";
     background: url("logoShell.svg") 0 0 no-repeat;
 }
