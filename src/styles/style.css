@@ -3,6 +3,10 @@
     user-select: auto;
 }
 
+#brackets-terminal-x .display-none {
+    display: none;
+}
+
 #brackets-terminal-x .toolbar {
     padding-top: 0;
     padding-bottom: 0;
