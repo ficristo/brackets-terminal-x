@@ -80,7 +80,7 @@ define(function (require, exports, module) {
         var socket = new WebSocket(url);
 
         var term = self._terminals[termId];
-        term.open(element);
+        term.open(element, false);
 
         socket.onopen = function () {
             term.attach(socket);
