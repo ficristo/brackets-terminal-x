@@ -27,7 +27,7 @@
     "postversion": "git push && git push --tags"
   },
   "dependencies": {
-    "node-pty": "0.6.3",
+    "node-pty": "0.6.4",
     "ws": "2.2.3",
     "xterm": "2.5.0"
   },
