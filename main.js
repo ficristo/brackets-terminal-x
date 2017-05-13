@@ -56,22 +56,26 @@ define(function (require, exports, module) {
         });
     });
 
+    function getOptions() {
+        var shellPrefs = Preferences.getShell();
+        var options = {
+            cols: null,
+            rows: null,
+            projectRoot: getProjectPath(),
+            shellPath: shellPrefs.shellPath,
+            shellArgs: shellPrefs.shellArgs
+        };
+        return options;
+    }
+
     AppInit.appReady(function () {
         manager.startConnection(Preferences.getPort());
         manager.on("connected", function (event) {
-            var shellPrefs = Preferences.getShell();
-            var options = {
-                cols: null,
-                rows: null,
-                projectRoot: getProjectPath(),
-                shellPath: shellPrefs.shellPath,
-                shellArgs: shellPrefs.shellArgs
-            };
-            manager.createTerminal(options);
+            manager.createTerminal(getOptions());
 
             $content.find(".nav-tabs .add-tab .add-terminal")
                 .on("click", function () {
-                    manager.createTerminal(options);
+                    manager.createTerminal(getOptions());
                 });
         });
         manager.on("created", function (event, terminalId) {
