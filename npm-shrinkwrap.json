@@ -23,9 +23,9 @@
       "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.1.0.tgz"
     },
     "ws": {
-      "version": "2.2.3",
-      "from": "ws@2.2.3",
-      "resolved": "https://registry.npmjs.org/ws/-/ws-2.2.3.tgz"
+      "version": "2.3.1",
+      "from": "ws@2.3.1",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-2.3.1.tgz"
     },
     "xterm": {
       "version": "2.5.0",
