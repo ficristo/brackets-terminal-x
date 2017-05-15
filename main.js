@@ -98,6 +98,11 @@ define(function (require, exports, module) {
                 var elem = $this.closest("li");
                 var sibling = elem.prev().size() !== 0 ? elem.prev() : elem.next();
                 sibling.find("a").click();
+
+                var href = sibling.find("a").attr("href");
+                var termId = href.replace(/^#/, "");
+                manager.setCurrentTermId(termId);
+
                 elem.remove();
                 $terminalsContainer.find("#" + terminalId).remove();
 
@@ -127,12 +132,12 @@ define(function (require, exports, module) {
                 .on("shown", function (e) {
                     var href = $(e.target).attr("href");
                     var termId = href.replace(/^#/, "");
-                    manager.setCurrentTab(termId);
+                    manager.setCurrentTermId(termId);
                 });
 
             var $panel = panel.$panel;
             $panel.on("panelResizeEnd", function () {
-                manager.resize(terminalId);
+                manager.resizeAll();
             });
         });
         manager.on("title", function (event, terminalId, title) {

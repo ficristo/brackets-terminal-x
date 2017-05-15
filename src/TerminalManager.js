@@ -104,12 +104,11 @@ define(function (require, exports, module) {
         }
     };
 
-    Manager.prototype.resizeAll = function (terminalId, cols, rows) {
+    Manager.prototype.resizeAll = function (cols, rows) {
         var self = this;
         for (var terminalId in self._terminals) {
             if (self._terminals.hasOwnProperty(terminalId)) {
-                var term = self._terminals[terminalId];
-                term.fit();
+                self.resize(terminalId, cols, rows);
             }
         }
     };
@@ -136,10 +135,12 @@ define(function (require, exports, module) {
     Manager.prototype.close = function (terminalId) {
         var self = this,
             term = self._terminals[terminalId];
+        term.socket.close();
         term.destroy();
+        delete self._terminals[terminalId];
     };
 
-    Manager.prototype.setCurrentTab = function (termId) {
+    Manager.prototype.setCurrentTermId = function (termId) {
         var self = this;
         self._currentTermId = termId;
     };
