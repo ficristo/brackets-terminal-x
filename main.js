@@ -77,6 +77,11 @@ define(function (require, exports, module) {
                 .on("click", function () {
                     manager.createTerminal(getOptions());
                 });
+
+            var $panel = panel.$panel;
+            $panel.on("panelResizeEnd", function () {
+                manager.resizeAll();
+            });
         });
         manager.on("created", function (event, terminalId) {
             var header = Mustache.render(terminalHeaderHtml, {
@@ -134,11 +139,6 @@ define(function (require, exports, module) {
                     var termId = href.replace(/^#/, "");
                     manager.setCurrentTermId(termId);
                 });
-
-            var $panel = panel.$panel;
-            $panel.on("panelResizeEnd", function () {
-                manager.resizeAll();
-            });
         });
         manager.on("title", function (event, terminalId, title) {
             title = title.trim() || Strings.DEFAULT_TITLE;
