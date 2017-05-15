@@ -116,6 +116,12 @@ define(function (require, exports, module) {
                     $content.find(".nav-container .nav-tabs li .close").css("display", "none");
                 }
             });
+            $header.find("a[data-toggle='tab']")
+                .on("shown", function (e) {
+                    var href = $(e.target).attr("href");
+                    var termId = href.replace(/^#/, "");
+                    manager.setCurrentTermId(termId);
+                });
             $header.insertBefore("#brackets-terminal-x .nav-tabs .add-tab");
 
             var html = Mustache.render(terminalContentHtml, {
@@ -132,13 +138,6 @@ define(function (require, exports, module) {
             if ($content.find(".nav-container .nav-tabs li").size() > 2) {
                 $content.find(".nav-container .nav-tabs li .close").css("display", "block");
             }
-
-            $content.find(".nav-container .nav-tabs a[data-toggle='tab']")
-                .on("shown", function (e) {
-                    var href = $(e.target).attr("href");
-                    var termId = href.replace(/^#/, "");
-                    manager.setCurrentTermId(termId);
-                });
         });
         manager.on("title", function (event, terminalId, title) {
             title = title.trim() || Strings.DEFAULT_TITLE;
