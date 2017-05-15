@@ -143,6 +143,8 @@ define(function (require, exports, module) {
     Manager.prototype.setCurrentTermId = function (termId) {
         var self = this;
         self._currentTermId = termId;
+        var term = self._terminals[termId];
+        term.focus();
     };
 
     var manager = new Manager();
