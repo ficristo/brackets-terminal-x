@@ -84,6 +84,7 @@
 */
 #terminals-container .tab-pane {
     height: 100%;
+    padding-left: 10px;
 }
 
 #brackets-terminal-x-icon {
