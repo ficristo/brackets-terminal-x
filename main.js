@@ -165,7 +165,7 @@ define(function (require, exports, module) {
         }
 
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_UPDATE_LAYOUT, function (event, editorAreaHeight) {
-            if (editorAreaHeight > 0) {
+            if (editorAreaHeight > 0 && manager.hasTerminals()) {
                 manager.resizeCurrentTerm();
             }
         });

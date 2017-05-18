@@ -158,6 +158,11 @@ define(function (require, exports, module) {
         term.focus();
     };
 
+    Manager.prototype.hasTerminals = function () {
+        var self = this;
+        return Object.keys(self._terminals).length > 0;
+    };
+
     var manager = new Manager();
     module.exports = manager;
 });
