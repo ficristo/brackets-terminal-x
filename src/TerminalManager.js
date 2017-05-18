@@ -113,6 +113,11 @@ define(function (require, exports, module) {
         }
     };
 
+    Manager.prototype.resizeCurrentTerm = function () {
+        var self = this;
+        self.resize(self._currentTermId);
+    };
+
     Manager.prototype.getElement = function (terminalId) {
         var self = this,
             term = self._terminals[terminalId];

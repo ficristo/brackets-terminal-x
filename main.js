@@ -80,7 +80,7 @@ define(function (require, exports, module) {
 
             var $panel = panel.$panel;
             $panel.on("panelResizeEnd", function () {
-                manager.resizeAll();
+                manager.resizeCurrentTerm();
             });
         });
         manager.on("created", function (event, terminalId) {
@@ -121,6 +121,7 @@ define(function (require, exports, module) {
                     var href = $(e.target).attr("href");
                     var termId = href.replace(/^#/, "");
                     manager.setCurrentTermId(termId);
+                    manager.resizeCurrentTerm();
                 });
             $header.insertBefore("#brackets-terminal-x .nav-tabs .add-tab");
 
@@ -164,7 +165,7 @@ define(function (require, exports, module) {
 
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_UPDATE_LAYOUT, function (event, editorAreaHeight) {
             if (editorAreaHeight > 0) {
-                manager.resizeAll();
+                manager.resizeCurrentTerm();
             }
         });
 
