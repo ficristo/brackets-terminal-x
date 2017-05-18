@@ -118,6 +118,12 @@ define(function (require, exports, module) {
         self.resize(self._currentTermId);
     };
 
+    Manager.prototype.focusCurrentTerm = function () {
+        var self = this,
+            term = self._terminals[self._currentTermId];
+        term.focus();
+    };
+
     Manager.prototype.getElement = function (termId) {
         var self = this,
             term = self._terminals[termId];

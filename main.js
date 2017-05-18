@@ -134,6 +134,7 @@ define(function (require, exports, module) {
             manager.open($html.get()[0], termId);
 
             $terminalsContainer.append($html);
+            manager.setCurrentTermId(termId);
 
             // Check for 2 because there is also the add-tab
             if ($content.find(".nav-container .nav-tabs li").size() > 2) {
@@ -172,6 +173,7 @@ define(function (require, exports, module) {
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_PANEL_SHOWN, function (event, panelId) {
             if (panelId === PANEL_ID) {
                 prefs.set("collapsed", false);
+                manager.focusCurrentTerm();
             }
         });
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_PANEL_HIDDEN, function (event, panelId) {
