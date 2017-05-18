@@ -44,32 +44,32 @@ define(function (require, exports, module) {
             shellPath: null
         };
         terminalsDomain.exec("createTerminal", options)
-            .done(function (terminalId) {
-                self._newTerminal(terminalId);
-                self.trigger("created", terminalId);
+            .done(function (termId) {
+                self._newTerminal(termId);
+                self.trigger("created", termId);
             })
             .fail(function (err) {
                 console.error("[brackets-terminal-x] failed to run terminals.createTerminal: ", err);
             });
     };
 
-    Manager.prototype._newTerminal = function (terminalId) {
+    Manager.prototype._newTerminal = function (termId) {
         var self = this,
             term = new Terminal({
                 cursorBlink: true
             });
-        self._terminals[terminalId] = term;
-        self._currentTermId = terminalId;
+        self._terminals[termId] = term;
+        self._currentTermId = termId;
 
         term.on("resize", function (size) {
             var cols = size.cols,
                 rows = size.rows;
 
-            terminalsDomain.exec("resize", terminalId, cols, rows);
+            terminalsDomain.exec("resize", termId, cols, rows);
         });
 
         term.on("title", function (title) {
-            self.trigger("title", terminalId, title);
+            self.trigger("title", termId, title);
         });
     };
 
@@ -94,9 +94,9 @@ define(function (require, exports, module) {
         };
     };
 
-    Manager.prototype.resize = function (terminalId, cols, rows) {
+    Manager.prototype.resize = function (termId, cols, rows) {
         var self = this,
-            term = self._terminals[terminalId];
+            term = self._terminals[termId];
         if (cols && rows) {
             term.resize(cols, rows);
         } else {
@@ -106,9 +106,9 @@ define(function (require, exports, module) {
 
     Manager.prototype.resizeAll = function (cols, rows) {
         var self = this;
-        for (var terminalId in self._terminals) {
-            if (self._terminals.hasOwnProperty(terminalId)) {
-                self.resize(terminalId, cols, rows);
+        for (var termId in self._terminals) {
+            if (self._terminals.hasOwnProperty(termId)) {
+                self.resize(termId, cols, rows);
             }
         }
     };
@@ -118,9 +118,9 @@ define(function (require, exports, module) {
         self.resize(self._currentTermId);
     };
 
-    Manager.prototype.getElement = function (terminalId) {
+    Manager.prototype.getElement = function (termId) {
         var self = this,
-            term = self._terminals[terminalId];
+            term = self._terminals[termId];
         return term.element;
     };
 
@@ -137,12 +137,12 @@ define(function (require, exports, module) {
         term.clear();
     };
 
-    Manager.prototype.close = function (terminalId) {
+    Manager.prototype.close = function (termId) {
         var self = this,
-            term = self._terminals[terminalId];
+            term = self._terminals[termId];
         term.socket.close();
         term.destroy();
-        delete self._terminals[terminalId];
+        delete self._terminals[termId];
     };
 
     Manager.prototype.setCurrentTermId = function (termId) {

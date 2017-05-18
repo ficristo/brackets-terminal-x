@@ -64,8 +64,8 @@ function cmdStartConnection(port, cb) {
     cb(null);
 }
 
-function cmdResize(terminalId, cols, rows) {
-    var term = terminals[terminalId];
+function cmdResize(termId, cols, rows) {
+    var term = terminals[termId];
     term.resize(cols, rows);
 }
 

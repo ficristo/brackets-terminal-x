@@ -83,9 +83,9 @@ define(function (require, exports, module) {
                 manager.resizeCurrentTerm();
             });
         });
-        manager.on("created", function (event, terminalId) {
+        manager.on("created", function (event, termId) {
             var header = Mustache.render(terminalHeaderHtml, {
-                id: terminalId,
+                id: termId,
                 title: Strings.DEFAULT_TITLE
             });
             var $header = $(header);
@@ -99,17 +99,17 @@ define(function (require, exports, module) {
                 // eslint-disable-next-line no-invalid-this
                 var $this = $(this);
 
-                manager.close(terminalId);
+                manager.close(termId);
                 var elem = $this.closest("li");
                 var sibling = elem.prev().size() !== 0 ? elem.prev() : elem.next();
                 sibling.find("a").click();
 
                 var href = sibling.find("a").attr("href");
-                var termId = href.replace(/^#/, "");
-                manager.setCurrentTermId(termId);
+                var currentTermId = href.replace(/^#/, "");
+                manager.setCurrentTermId(currentTermId);
 
                 elem.remove();
-                $terminalsContainer.find("#" + terminalId).remove();
+                $terminalsContainer.find("#" + termId).remove();
 
                 // Check for 2 because there is also the add-tab
                 if ($content.find(".nav-container .nav-tabs li").size() === 2) {
@@ -119,19 +119,19 @@ define(function (require, exports, module) {
             $header.find("a[data-toggle='tab']")
                 .on("shown", function (e) {
                     var href = $(e.target).attr("href");
-                    var termId = href.replace(/^#/, "");
-                    manager.setCurrentTermId(termId);
+                    var currentTermId = href.replace(/^#/, "");
+                    manager.setCurrentTermId(currentTermId);
                     manager.resizeCurrentTerm();
                 });
             $header.insertBefore("#brackets-terminal-x .nav-tabs .add-tab");
 
             var html = Mustache.render(terminalContentHtml, {
-                id: terminalId
+                id: termId
             });
 
             var $html = $(html);
             $html.addClass("active");
-            manager.open($html.get()[0], terminalId);
+            manager.open($html.get()[0], termId);
 
             $terminalsContainer.append($html);
 
@@ -140,9 +140,9 @@ define(function (require, exports, module) {
                 $content.find(".nav-container .nav-tabs li .close").css("display", "block");
             }
         });
-        manager.on("title", function (event, terminalId, title) {
+        manager.on("title", function (event, termId, title) {
             title = title.trim() || Strings.DEFAULT_TITLE;
-            var header = $content.find("a[href='#" + terminalId + "'] > p:first-child");
+            var header = $content.find("a[href='#" + termId + "'] > p:first-child");
             header.text(title);
             header.prop("title", title);
         });
