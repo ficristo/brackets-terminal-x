@@ -13,6 +13,6 @@ addons:
       - g++-4.9-multilib
       - libgtk2.0-0
       - libx11-dev
-      - linux-libc-dev
+      - linux-libc-dev:i386
 script:
   - npm test
