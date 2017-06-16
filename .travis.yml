@@ -12,5 +12,6 @@ addons:
       - g++-4.8
       - g++-4.8-multilib
       - libgtk2.0-0
+      - libx11-dev
 script:
   - npm test
