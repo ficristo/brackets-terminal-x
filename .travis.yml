@@ -11,6 +11,6 @@ addons:
     packages:
       - g++-4.8
       - g++-4.8-multilib
-      - linux-libc-dev
+      - libgtk2.0-0
 script:
   - npm test
