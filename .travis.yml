@@ -1,12 +1,16 @@
 language: node_js
 node_js:
   - "6"
-before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install g++-4.8
-  - export CXX=g++-4.8
-install:
-  - npm install
+env:
+  global:
+    - CXX=g++-4.9
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.9
+      - g++-4.9-multilib
+      - linux-libc-dev:i386
 script:
   - npm test
