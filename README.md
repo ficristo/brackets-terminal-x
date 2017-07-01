@@ -1,11 +1,11 @@
 # Brackets Terminal X
 
-Brackets extension to integrate a terminal.
+Brackets extension to integrate the terminal of your choice.
 
-**NOTE:** the extension is still mostly an experiment.
+![Terminals](screenshots/terminals.png)
 
 
-## Prerequirements
+## Requirements
 
 You need a C++ compiler installed to your computer.
 
@@ -28,9 +28,9 @@ After that:
 - run `npm install` [3]
 - close and reopen Brackets.
 
-[1] Use `Help \ Show Extensions Folder` or [manually](https://github.com/adobe/brackets/wiki/Extension-Locations#user-extensions-folder)
-[2] This file is necessary for Windows build
-[3] Make sure to use the same major version of Node.js used for Brackets. Brackets 1.9 uses Node.js 6.
+[1] Use `Help \ Show Extensions Folder` or [manually](https://github.com/adobe/brackets/wiki/Extension-Locations#user-extensions-folder)<br />
+[2] This file is necessary for Windows build<br />
+[3] Make sure to use the same major version of Node.js used for Brackets. Brackets 1.9 uses Node.js 6.<br />
 
 
 ## Report an issue
