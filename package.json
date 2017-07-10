@@ -29,7 +29,7 @@
   "dependencies": {
     "node-pty": "0.6.6",
     "ws": "2.3.1",
-    "xterm": "2.7.0"
+    "xterm": "2.8.1"
   },
   "devDependencies": {
     "eslint": "3.19.0",
