@@ -8,9 +8,9 @@
       "resolved": "https://registry.npmjs.org/nan/-/nan-2.5.0.tgz"
     },
     "node-pty": {
-      "version": "0.6.6",
-      "from": "node-pty@0.6.6",
-      "resolved": "https://registry.npmjs.org/node-pty/-/node-pty-0.6.6.tgz"
+      "version": "0.6.9",
+      "from": "node-pty@0.6.9",
+      "resolved": "https://registry.npmjs.org/node-pty/-/node-pty-0.6.9.tgz"
     },
     "safe-buffer": {
       "version": "5.0.1",
