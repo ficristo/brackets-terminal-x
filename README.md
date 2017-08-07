@@ -44,7 +44,6 @@ To run it you should clone their repository and follow their [instructions](http
 
 ```cson
 {
-    "brackets-terminal-x.port": 8080,
     // Other examples:
     // - C:\\Windows\\sysnative\\WindowsPowerShell\\v1.0\\powershell.exe
     // - C:\\Program Files\\Git\\bin\\bash.exe

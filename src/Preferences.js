@@ -7,15 +7,6 @@ define(function (require, exports, module) {
 
     // Default preference values.
     prefs.definePreference(
-        "port",
-        "number",
-        "8080",
-        {
-            name: "The port where listen terminal events",
-            description: Strings.DESCRIPTION_TERMINAL_PORT
-        }
-    );
-    prefs.definePreference(
         "shell.windows",
         "string",
         "C:\\Windows\\sysnative\\cmd.exe",
@@ -106,11 +97,6 @@ define(function (require, exports, module) {
         return params;
     }
 
-    function getPort() {
-        return prefs.get("port") || 8080;
-    }
-
     exports.getShell = getShell;
-    exports.getPort = getPort;
     exports.prefs = prefs;
 });

@@ -20,7 +20,6 @@ define(function (require, exports, module) {
     }
     EventDispatcher.makeEventDispatcher(Manager.prototype);
 
-    Manager.prototype._port = undefined;
     Manager.prototype._terminals = {};
     Manager.prototype._currentTermId = null;
 
