@@ -62,6 +62,14 @@ define(function (require, exports, module) {
             self.trigger("title", termId, title);
         });
 
+        term.on("blur", function () {
+            self.trigger("blurred", termId);
+        });
+
+        term.on("focus", function () {
+            self.trigger("focused", termId);
+        });
+
         term.on("data", function (data) {
             terminalsDomain.exec("message", termId, data);
         });

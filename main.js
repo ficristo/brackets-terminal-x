@@ -147,6 +147,14 @@ define(function (require, exports, module) {
             header.text(title);
             header.prop("title", title);
         });
+        manager.on("blurred", function (event, termId) {
+            var li = $content.find("a[href='#" + termId + "']").parent();
+            li.removeClass("active");
+        });
+        manager.on("focused", function (event, termId) {
+            var li = $content.find("a[href='#" + termId + "']").parent();
+            li.addClass("active");
+        });
 
         $content.on("click", ".toolbar > a.close", function () {
             panel.hide();
