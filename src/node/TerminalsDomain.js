@@ -2,14 +2,16 @@
 "use strict";
 
 var pty = require("node-pty"),
-    shellPath = process.platform === "win32"
-        ? "C:\\Windows\\system32\\cmd.exe"
-        : "bash",
     terminals = {},
     gDomainManager;
 
 function cmdCreateTerminal(options, cb) {
-    var shell = options.shellPath || shellPath;
+    var shell = options.shellPath;
+    if (!shell) {
+        cb("Shell path must be set.");
+        return;
+    }
+
     var args = options.shellArgs || [];
     var term = pty.spawn(shell, args, {
         name: "xterm-256color",
