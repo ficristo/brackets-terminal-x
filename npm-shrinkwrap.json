@@ -12,21 +12,6 @@
       "from": "node-pty@0.6.10",
       "resolved": "https://registry.npmjs.org/node-pty/-/node-pty-0.6.10.tgz"
     },
-    "safe-buffer": {
-      "version": "5.0.1",
-      "from": "safe-buffer@>=5.0.1 <5.1.0",
-      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.0.1.tgz"
-    },
-    "ultron": {
-      "version": "1.1.0",
-      "from": "ultron@>=1.1.0 <1.2.0",
-      "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.1.0.tgz"
-    },
-    "ws": {
-      "version": "2.3.1",
-      "from": "ws@2.3.1",
-      "resolved": "https://registry.npmjs.org/ws/-/ws-2.3.1.tgz"
-    },
     "xterm": {
       "version": "2.9.0",
       "from": "xterm@2.9.0",

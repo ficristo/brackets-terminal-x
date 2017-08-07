@@ -69,20 +69,18 @@ define(function (require, exports, module) {
     }
 
     AppInit.appReady(function () {
-        manager.startConnection(Preferences.getPort());
-        manager.on("connected", function (event) {
-            manager.createTerminal(getOptions());
+        manager.createTerminal(getOptions());
 
-            $content.find(".nav-tabs .add-tab .add-terminal")
-                .on("click", function () {
-                    manager.createTerminal(getOptions());
-                });
-
-            var $panel = panel.$panel;
-            $panel.on("panelResizeEnd", function () {
-                manager.resizeCurrentTerm();
+        $content.find(".nav-tabs .add-tab .add-terminal")
+            .on("click", function () {
+                manager.createTerminal(getOptions());
             });
+
+        var $panel = panel.$panel;
+        $panel.on("panelResizeEnd", function () {
+            manager.resizeCurrentTerm();
         });
+
         manager.on("created", function (event, termId) {
             var header = Mustache.render(terminalHeaderHtml, {
                 id: termId,
@@ -107,6 +105,7 @@ define(function (require, exports, module) {
                 var href = sibling.find("a").attr("href");
                 var currentTermId = href.replace(/^#/, "");
                 manager.setCurrentTermId(currentTermId);
+                manager.resizeCurrentTerm();
 
                 elem.remove();
                 $terminalsContainer.find("#" + termId).remove();
@@ -135,6 +134,7 @@ define(function (require, exports, module) {
 
             $terminalsContainer.append($html);
             manager.setCurrentTermId(termId);
+            manager.resizeCurrentTerm();
 
             // Check for 2 because there is also the add-tab
             if ($content.find(".nav-container .nav-tabs li").size() > 2) {

@@ -9,29 +9,20 @@ define(function (require, exports, module) {
         Terminal = require("node_modules/xterm/dist/xterm");
 
     require([
-        "node_modules/xterm/dist/addons/attach/attach",
         "node_modules/xterm/dist/addons/fit/fit"
     ]);
 
     function Manager() {
+        var self = this;
+        terminalsDomain.on("data", function (event, termId, data) {
+            self._terminals[termId].write(data);
+        });
     }
     EventDispatcher.makeEventDispatcher(Manager.prototype);
 
     Manager.prototype._port = undefined;
     Manager.prototype._terminals = {};
     Manager.prototype._currentTermId = null;
-
-    Manager.prototype.startConnection = function (port) {
-        var self = this;
-        self._port = port;
-        terminalsDomain.exec("startConnection", port)
-            .done(function () {
-                self.trigger("connected");
-            })
-            .fail(function (err) {
-                console.error("[brackets-terminal-x] failed to run terminals.startConnection: ", err);
-            });
-    };
 
     Manager.prototype.createTerminal = function (options) {
         var self = this;
@@ -71,27 +62,17 @@ define(function (require, exports, module) {
         term.on("title", function (title) {
             self.trigger("title", termId, title);
         });
+
+        term.on("data", function (data) {
+            terminalsDomain.exec("message", termId, data);
+        });
     };
 
     Manager.prototype.open = function (element, termId) {
         var self = this;
-        var protocol = (window.location.protocol === "https:") ? "wss://" : "ws://";
-        var url = protocol + "localhost:" + self._port + "/?pid=" + termId;
-        var socket = new WebSocket(url);
 
         var term = self._terminals[termId];
         term.open(element, false);
-
-        socket.onopen = function () {
-            term.attach(socket);
-            term.fit();
-        };
-        socket.onclose = function () {
-            // Nothing to do.
-        };
-        socket.onerror = function (err) {
-            console.error(err);
-        };
     };
 
     Manager.prototype.resize = function (termId, cols, rows) {
@@ -132,9 +113,10 @@ define(function (require, exports, module) {
 
     Manager.prototype.goto = function (path) {
         var self = this,
-            term = self._terminals[self._currentTermId];
-        var eol = brackets.platform === "win" ? "\r\n" : "\n";
-        term.socket.send("cd \"" + path + "\"" + eol);
+            termId = self._currentTermId,
+            eol = brackets.platform === "win" ? "\r\n" : "\n",
+            data = "cd \"" + path + "\"" + eol;
+        terminalsDomain.exec("message", termId, data);
     };
 
     Manager.prototype.clear = function () {
@@ -146,9 +128,9 @@ define(function (require, exports, module) {
     Manager.prototype.close = function (termId) {
         var self = this,
             term = self._terminals[termId];
-        term.socket.close();
         term.destroy();
         delete self._terminals[termId];
+        terminalsDomain.exec("close", termId);
     };
 
     Manager.prototype.setCurrentTermId = function (termId) {

@@ -1,15 +1,12 @@
 /*eslint-env node */
 "use strict";
 
-var url = require("url"),
-    pty = require("node-pty"),
-    WebSocketServer = require("ws").Server,
-
+var pty = require("node-pty"),
     shellPath = process.platform === "win32"
         ? "C:\\Windows\\system32\\cmd.exe"
         : "bash",
     terminals = {},
-    logs = {};
+    gDomainManager;
 
 function cmdCreateTerminal(options, cb) {
     var shell = options.shellPath || shellPath;
@@ -23,45 +20,11 @@ function cmdCreateTerminal(options, cb) {
     });
 
     terminals[term.pid] = term;
-    logs[term.pid] = "";
     term.on("data", function (data) {
-        logs[term.pid] += data;
+        gDomainManager.emitEvent("terminals", "data", [term.pid, data]);
     });
 
     cb(null, term.pid);
-}
-
-function cmdStartConnection(port, cb) {
-    var wsServer = new WebSocketServer({ port: port });
-
-    wsServer.on("connection", function connection(ws) {
-        var query = url.parse(ws.upgradeReq.url, true).query;
-        var termId = parseInt(query.pid, 10);
-        var term = terminals[termId];
-
-        ws.send(logs[term.pid]);
-
-        term.on("data", function (data) {
-            try {
-                ws.send(data);
-            } catch (ex) {
-                // The WebSocket is not open, ignore
-            }
-        });
-        ws.on("message", function (msg) {
-            term.write(msg);
-        });
-        ws.on("close", function () {
-            process.kill(term.pid);
-            // Clean things up
-            delete terminals[term.pid];
-        });
-    }).on("error", function (e) {
-        console.error("Connection error:");
-        console.error(e);
-    });
-
-    cb(null);
 }
 
 function cmdResize(termId, cols, rows) {
@@ -69,25 +32,24 @@ function cmdResize(termId, cols, rows) {
     term.resize(cols, rows);
 }
 
+function cmdMessage(termId, message) {
+    var term = terminals[termId];
+    term.write(message);
+}
+
+function cmdClose(termId) {
+    var term = terminals[termId];
+    process.kill(term.pid);
+    // Clean things up
+    delete terminals[term.pid];
+}
+
 function init(domainManager) {
     if (!domainManager.hasDomain("terminals")) {
         domainManager.registerDomain("terminals", {major: 0, minor: 1});
     }
-    domainManager.registerCommand(
-        "terminals",        // domain name
-        "startConnection",  // command name
-        cmdStartConnection, // command handler function
-        true,               // this command is asynchronous in Node
-        "Start a socket connection",
-        [
-            {
-                name: "port",
-                type: "number",
-                description: "The port to connect"
-            }
-        ],
-        []
-    );
+    gDomainManager = domainManager;
+
     domainManager.registerCommand(
         "terminals",        // domain name
         "createTerminal",   // command name
@@ -134,6 +96,57 @@ function init(domainManager) {
         ],
         []
     );
+    domainManager.registerCommand(
+        "terminals",        // domain name
+        "message",          // command name
+        cmdMessage,         // command handler function
+        true,               // this command is asynchronous in Node
+        "Send data to a terminal",
+        [
+            {
+                name: "pid",
+                type: "number",
+                description: "The id of the terminal"
+            },
+            {
+                name: "message",
+                type: "string",
+                description: "The data sent to the terminal"
+            }
+        ],
+        []
+    );
+    domainManager.registerCommand(
+        "terminals",        // domain name
+        "close",            // command name
+        cmdClose,           // command handler function
+        true,               // this command is asynchronous in Node
+        "Close a terminal",
+        [
+            {
+                name: "pid",
+                type: "number",
+                description: "The id of the terminal"
+            }
+        ],
+        []
+    );
+
+    domainManager.registerEvent(
+        "terminals",        // domain name
+        "data",             // event name
+        [
+            {
+                name: "pid",
+                type: "number",
+                description: "The id of the spawned terminal"
+            },
+            {
+                name: "message",
+                type: "string",
+                description: "The message"
+            }
+        ]);
 }
 
 exports.init = init;
