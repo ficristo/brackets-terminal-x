@@ -39,9 +39,9 @@ function cmdMessage(termId, message) {
 
 function cmdClose(termId) {
     var term = terminals[termId];
-    process.kill(term.pid);
     // Clean things up
     delete terminals[term.pid];
+    term.kill();
 }
 
 function init(domainManager) {
