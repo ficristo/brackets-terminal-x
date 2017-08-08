@@ -59,6 +59,22 @@ To run it you should clone their repository and follow their [instructions](http
 **NOTE:** Brackets preferences do NOT support comments in them.
 
 
+## User Key Bindings
+
+No key binding is set by default.
+
+```cson
+{
+    // Show \ Hide the terminal panel.
+    "": "brackets-terminal-x.show",
+    // Run focused editor in the terminal.
+    "": "brackets-terminal-x.run-script"
+}
+```
+
+**NOTE:** Brackets User Key Bindings do NOT support comments in them.
+
+
 ## Known issues
 
 The height of the scrollbar of the terminal is less than the panel.
