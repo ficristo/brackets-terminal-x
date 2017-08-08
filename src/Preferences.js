@@ -71,6 +71,19 @@ define(function (require, exports, module) {
         }
     );
 
+    prefs.definePreference(
+        "binaries",
+        "object",
+        {
+            "javascript": "node",
+            "text/x-sh": "sh"
+        },
+        {
+            name: "Mapping of binary to use to run a script",
+            description: Strings.DESCRIPTION_BINARY
+        }
+    );
+
     var shell = {
         win: {
             shellPath: "shell.windows",

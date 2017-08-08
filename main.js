@@ -8,6 +8,8 @@ define(function (require, exports, module) {
         Mustache = brackets.getModule("thirdparty/mustache/mustache"),
         CommandManager = brackets.getModule("command/CommandManager"),
         Menus = brackets.getModule("command/Menus"),
+        DocumentManager = brackets.getModule("document/DocumentManager"),
+        EditorManager = brackets.getModule("editor/EditorManager"),
         manager = require("src/TerminalManager"),
         toolbar = require("src/ToolbarManager"),
         Preferences = require("src/Preferences"),
@@ -59,6 +61,37 @@ define(function (require, exports, module) {
         return "";
     }
 
+    function getOptions() {
+        var shellPrefs = Preferences.getShell();
+        var options = {
+            cols: null,
+            rows: null,
+            projectRoot: getProjectPath(),
+            shellPath: shellPrefs.shellPath,
+            shellArgs: shellPrefs.shellArgs
+        };
+        return options;
+    }
+
+    function getBinary(language) {
+        var mode = language.getMode();
+        var prefs = Preferences.prefs;
+        var binary = prefs.get("binaries")[mode];
+        return binary;
+    }
+
+    function runScript() {
+        manager.createTerminal(getOptions());
+        handleAction("show");
+        manager.one("after-created", function () {
+            var doc = DocumentManager.getCurrentDocument();
+            var fullPath = doc.file.fullPath;
+            var binary = getBinary(doc.language);
+            binary = !!binary ? binary + " " : "";
+            manager.run(binary + fullPath);
+        });
+    }
+
     AppInit.htmlReady(function () {
         ExtensionUtils.loadStyleSheet(module, "node_modules/xterm/dist/xterm.css");
         ExtensionUtils.loadStyleSheet(module, "src/styles/nav-tabs-override.less");
@@ -79,23 +112,24 @@ define(function (require, exports, module) {
         var menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU);
         menu.addMenuItem(COMMAND_TERMINAL_SHOW);
 
+        var COMMAND_TERMINAL_RUN_SCRIPT = PANEL_ID + ".run-script";
+        var commandRun = CommandManager.register(
+            Strings.CONTEXT_MENU_RUN_SCRIPT,
+            COMMAND_TERMINAL_RUN_SCRIPT,
+            runScript);
+        var editorContextMenu = Menus.getContextMenu(Menus.ContextMenuIds.EDITOR_MENU);
+        editorContextMenu.addMenuItem(COMMAND_TERMINAL_RUN_SCRIPT);
+
         toolbar.createIcon();
         toolbar.on("clicked", function () {
             handleAction("toggle");
         });
-    });
 
-    function getOptions() {
-        var shellPrefs = Preferences.getShell();
-        var options = {
-            cols: null,
-            rows: null,
-            projectRoot: getProjectPath(),
-            shellPath: shellPrefs.shellPath,
-            shellArgs: shellPrefs.shellArgs
-        };
-        return options;
-    }
+        EditorManager.on("activeEditorChange." + PANEL_ID, function (event, newEditor, oldEditor) {
+            var binary = getBinary(newEditor.document.language);
+            commandRun.setEnabled(!!binary);
+        });
+    });
 
     AppInit.appReady(function () {
         manager.createTerminal(getOptions());
@@ -169,6 +203,8 @@ define(function (require, exports, module) {
             if ($content.find(".nav-container .nav-tabs li").size() > 2) {
                 $content.find(".nav-container .nav-tabs li .close").css("display", "block");
             }
+
+            manager.trigger("after-created");
         });
         manager.on("title", function (event, termId, title) {
             title = title.trim() || Strings.DEFAULT_TITLE;

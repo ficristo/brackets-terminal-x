@@ -6,7 +6,9 @@ define(function (require, exports, module) {
         NodeDomain = brackets.getModule("utils/NodeDomain"),
         terminalsDomain = new NodeDomain("terminals", ExtensionUtils.getModulePath(module, "node/TerminalsDomain")),
 
-        Terminal = require("node_modules/xterm/dist/xterm");
+        Terminal = require("node_modules/xterm/dist/xterm"),
+
+        EOL = brackets.platform === "win" ? "\r\n" : "\n";
 
     require([
         "node_modules/xterm/dist/addons/fit/fit"
@@ -121,8 +123,7 @@ define(function (require, exports, module) {
     Manager.prototype.goto = function (path) {
         var self = this,
             termId = self._currentTermId,
-            eol = brackets.platform === "win" ? "\r\n" : "\n",
-            data = "cd \"" + path + "\"" + eol;
+            data = "cd \"" + path + "\"" + EOL;
         terminalsDomain.exec("message", termId, data);
     };
 
@@ -130,6 +131,12 @@ define(function (require, exports, module) {
         var self = this,
             term = self._terminals[self._currentTermId];
         term.clear();
+    };
+
+    Manager.prototype.run = function (data) {
+        var self = this,
+            termId = self._currentTermId;
+        terminalsDomain.exec("message", termId, data + EOL);
     };
 
     Manager.prototype.close = function (termId) {
