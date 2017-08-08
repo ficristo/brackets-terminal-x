@@ -6,6 +6,8 @@ define(function (require, exports, module) {
         WorkspaceManager = brackets.getModule("view/WorkspaceManager"),
         ProjectManager = brackets.getModule("project/ProjectManager"),
         Mustache = brackets.getModule("thirdparty/mustache/mustache"),
+        CommandManager = brackets.getModule("command/CommandManager"),
+        Menus = brackets.getModule("command/Menus"),
         manager = require("src/TerminalManager"),
         toolbar = require("src/ToolbarManager"),
         Preferences = require("src/Preferences"),
@@ -13,7 +15,8 @@ define(function (require, exports, module) {
         terminalsPanelHtml = require("text!src/views/terminals-panel.html"),
         terminalHeaderHtml = require("text!src/views/terminal-header.html"),
         terminalContentHtml = require("text!src/views/terminal-content.html"),
-        PANEL_ID = "brackets-terminal-x";
+        PANEL_ID = "brackets-terminal-x",
+        commandShow;
 
     var content = Mustache.render(terminalsPanelHtml, {
         Strings: Strings
@@ -21,11 +24,31 @@ define(function (require, exports, module) {
     var $content = $(content);
     var panel = WorkspaceManager.createBottomPanel(PANEL_ID, $content, 100);
 
-    function handleAction() {
-        if (panel.isVisible()) {
-            panel.hide();
-        } else {
+    function handleAction(action) {
+        switch (action) {
+        case "check":
+            commandShow.setChecked(true);
+            break;
+        case "uncheck":
+            commandShow.setChecked(false);
+            break;
+        case "show":
             panel.show();
+            commandShow.setChecked(true);
+            break;
+        case "hide":
+            panel.hide();
+            commandShow.setChecked(false);
+            break;
+        case "toggle":
+        default:
+            if (panel.isVisible()) {
+                panel.hide();
+                commandShow.setChecked(false);
+            } else {
+                panel.show();
+                commandShow.setChecked(true);
+            }
         }
     }
 
@@ -50,9 +73,15 @@ define(function (require, exports, module) {
             }
         });
 
+        var COMMAND_TERMINAL_SHOW = PANEL_ID + ".show";
+        commandShow = CommandManager.register(Strings.MENU_SHOW, COMMAND_TERMINAL_SHOW, handleAction);
+
+        var menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU);
+        menu.addMenuItem(COMMAND_TERMINAL_SHOW);
+
         toolbar.createIcon();
         toolbar.on("clicked", function () {
-            handleAction();
+            handleAction("toggle");
         });
     });
 
@@ -157,7 +186,7 @@ define(function (require, exports, module) {
         });
 
         $content.on("click", ".toolbar > a.close", function () {
-            panel.hide();
+            handleAction("hide");
         });
 
         ProjectManager.on("projectOpen", function () {
@@ -169,7 +198,7 @@ define(function (require, exports, module) {
 
         var prefs = Preferences.prefs;
         if (!prefs.get("collapsed")) {
-            panel.show();
+            handleAction("show");
         }
 
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_UPDATE_LAYOUT, function (event, editorAreaHeight) {
@@ -182,11 +211,13 @@ define(function (require, exports, module) {
             if (panelId === PANEL_ID) {
                 prefs.set("collapsed", false);
                 manager.focusCurrentTerm();
+                handleAction("check");
             }
         });
         WorkspaceManager.on(WorkspaceManager.EVENT_WORKSPACE_PANEL_HIDDEN, function (event, panelId) {
             if (panelId === PANEL_ID) {
                 prefs.set("collapsed", true);
+                handleAction("uncheck");
             }
         });
     });
