@@ -126,7 +126,10 @@ define(function (require, exports, module) {
         });
 
         EditorManager.on("activeEditorChange." + PANEL_ID, function (event, newEditor, oldEditor) {
-            var binary = getBinary(newEditor.document.language);
+            var binary = false;
+            if (newEditor) {
+                binary = getBinary(newEditor.document.language);
+            }
             commandRun.setEnabled(!!binary);
         });
     });
