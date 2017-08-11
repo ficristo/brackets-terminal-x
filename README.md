@@ -33,6 +33,18 @@ After that:
 [3] Make sure to use the same major version of Node.js used for Brackets. Brackets 1.9 uses Node.js 6.<br />
 
 
+### Brackets Electron
+
+To install manually is similar as above, but instead to delete the '.npmrc' file,
+you need to overwrite it with the following content (if the file doesn't exist create one):
+```properties
+disturl=https://atom.io/download/electron
+runtime=electron
+target=1.6.6    # The same version of electron used in Brackets Electron
+arch=x64        # x64 if you're on 64 bit platform, ia32 if you're on 32 bit platform
+```
+
+
 ## Report an issue
 
 This extension is based on [xterm](https://github.com/sourcelair/xterm.js).
