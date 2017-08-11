@@ -13,9 +13,9 @@
       "resolved": "https://registry.npmjs.org/node-pty/-/node-pty-0.6.10.tgz"
     },
     "xterm": {
-      "version": "2.9.0",
-      "from": "xterm@2.9.0",
-      "resolved": "https://registry.npmjs.org/xterm/-/xterm-2.9.0.tgz"
+      "version": "2.9.2",
+      "from": "xterm@2.9.2",
+      "resolved": "https://registry.npmjs.org/xterm/-/xterm-2.9.2.tgz"
     }
   }
 }
