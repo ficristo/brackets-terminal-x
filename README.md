@@ -12,31 +12,37 @@ You need a C++ compiler installed to your computer.
 
 ## How to install
 
-### Windows
-
-Since Brackets 1.9 it is possible to install directly from the Extension Manager.
+Since Brackets 1.11 it is possible to install directly from the Extension Manager on all platforms.
 It can take a while to be installed, be patient.
 
-### Other platforms
+### Installing manually
 
 Download a zip of the extension from GitHub through its "Clone or Download" feature.
 After that:
 - go to your extension folder [1]
 - here extract the zip downloaded before
 - `cd brackets-terminal-x-master`
-- delete the `.npmrc` file inside the new folder [2]
+- only if you are on Windows, create a new file named `.npmrc` [2]
 - run `npm install` [3]
 - close and reopen Brackets.
 
+
+
 [1] Use `Help \ Show Extensions Folder` or [manually](https://github.com/adobe/brackets/wiki/Extension-Locations#user-extensions-folder)<br />
-[2] This file is necessary for Windows build<br />
-[3] Make sure to use the same major version of Node.js used for Brackets. Brackets 1.9 uses Node.js 6.<br />
+[2] This file is necessary for Windows build until Windows 64 is properly supported.<br />
+Its content should be:
+```properties
+arch=ia32
+npm_config_arch=ia32
+npm_config_target_arch=ia32
+```
+[3] Make sure to use the same major version of Node.js used for Brackets. Brackets 1.11 uses Node.js 6.<br />
 
 
 ### Brackets Electron
 
-To install manually is similar as above, but instead to delete the '.npmrc' file,
-you need to overwrite it with the following content (if the file doesn't exist create one):
+To install manually is similar as above, but, regardless the platform, create always the '.npmrc' file.
+Its content should be the following:
 ```properties
 disturl=https://atom.io/download/electron
 runtime=electron
