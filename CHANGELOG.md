@@ -1,3 +1,14 @@
+## v0.6.0 (2017-06-11)
+
+Remove websocket usage and instead rely on Brackets api.
+
+Add menu to show / hide the terminal panel.
+
+Add a context menu to run the file in terminal.
+
+Upgrade deps.
+
+
 ## v0.5.0 (2017-06-11)
 
 Set correctly the current terminal.
