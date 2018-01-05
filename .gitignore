@@ -3,3 +3,6 @@ node_modules
 
 # Avoid to commit the "distribution"...
 brackets-terminal-x.*
+
+# Useful for developing
+.npmrc
