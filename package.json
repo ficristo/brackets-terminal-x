@@ -16,7 +16,7 @@
   "author": "ficristo",
   "license": "MIT",
   "engines": {
-    "brackets": "^1.8.0"
+    "brackets": "^1.11.0"
   },
   "scripts": {
     "lint:js": "eslint . --ignore-path .gitignore",
