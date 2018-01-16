@@ -13,6 +13,7 @@ define(function (require, exports, module) {
         manager = require("src/TerminalManager"),
         toolbar = require("src/ToolbarManager"),
         Preferences = require("src/Preferences"),
+        Search = require("src/search/Search"),
         Strings = require("src/strings"),
         terminalsPanelHtml = require("text!src/views/terminals-panel.html"),
         terminalHeaderHtml = require("text!src/views/terminal-header.html"),
@@ -104,6 +105,9 @@ define(function (require, exports, module) {
             if (projectPath) {
                 manager.goto(projectPath);
             }
+        });
+        $content.find("#search").on("click", function () {
+            Search.openSearchBar();
         });
 
         var COMMAND_TERMINAL_SHOW = PANEL_ID + ".show";

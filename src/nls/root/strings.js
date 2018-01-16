@@ -13,6 +13,7 @@ define({
 
     "CMD_CLEAR": "Clear current terminal",
     "CMD_CD_CURRENT_PROJECT": "`cd` root current project",
+    "CMD_SEARCH": "Search in current terminal",
 
     "DEFAULT_TITLE": "Terminal"
 });

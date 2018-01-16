@@ -91,3 +91,23 @@
     content: "";
     background: url("logoShell.svg") 0 0 no-repeat;
 }
+
+
+/* Modal bar for Search */
+
+#brackets-terminal-x .bottom-panel.modal-bar {
+    height: initial;
+    position: relative;
+    padding: 2px 8px 0px 3px;
+}
+
+#brackets-terminal-x .modal-bar.popout {
+    position: relative;
+}
+
+#brackets-terminal-x .modal-bar.offscreen {
+    transform: none;
+    transition: none;
+}
+
+

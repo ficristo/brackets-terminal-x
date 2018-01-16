@@ -11,7 +11,8 @@ define(function (require, exports, module) {
         EOL = brackets.platform === "win" ? "\r\n" : "\n";
 
     require([
-        "node_modules/xterm/dist/addons/fit/fit"
+        "node_modules/xterm/dist/addons/fit/fit",
+        "node_modules/xterm/dist/addons/search/search"
     ]);
 
     function Manager() {
@@ -157,6 +158,17 @@ define(function (require, exports, module) {
     Manager.prototype.hasTerminals = function () {
         var self = this;
         return Object.keys(self._terminals).length > 0;
+    };
+
+    Manager.prototype.search = function (text, searchBackwards) {
+        var self = this;
+        var self = this,
+            term = self._terminals[self._currentTermId];
+        if (searchBackwards) {
+            term.findPrevious(text);
+        } else {
+            term.findNext(text);
+        }
     };
 
     var manager = new Manager();

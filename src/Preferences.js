@@ -3,7 +3,8 @@ define(function (require, exports, module) {
 
     var PreferencesManager = brackets.getModule("preferences/PreferencesManager"),
         Strings            = require("src/strings"),
-        prefs              = PreferencesManager.getExtensionPrefs("brackets-terminal-x");
+        prefs              = PreferencesManager.getExtensionPrefs("brackets-terminal-x"),
+        stateManager       = PreferencesManager.stateManager.getPrefixedSystem("brackets-terminal-x");
 
     // Default preference values.
     prefs.definePreference(
@@ -112,4 +113,5 @@ define(function (require, exports, module) {
 
     exports.getShell = getShell;
     exports.prefs = prefs;
+    exports.stateManager = stateManager;
 });

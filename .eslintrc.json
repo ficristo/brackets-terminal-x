@@ -8,7 +8,9 @@
         "no-invalid-regexp": 2,
         "no-regex-spaces": 2,
         "no-unsafe-negation": 2,
-        "valid-jsdoc": 1,
+        "valid-jsdoc": [1, {
+            "requireReturn": false
+        }],
         "valid-typeof": 2,
 
         // http://eslint.org/docs/rules/#best-practices
