@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.base",
+    "compilerOptions": {
+        "module": "amd",
+        "moduleResolution": "classic"
+    },
+    "include": [
+        "./**/*",
+        "./node_modules/@types/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -1,24 +1,22 @@
-/*eslint-env node */
-"use strict";
+import * as pty from "node-pty-prebuilt";
 
-var pty = require("node-pty"),
-    terminals = {},
-    gDomainManager;
+const terminals = {};
+let gDomainManager;
 
 function cmdCreateTerminal(options, cb) {
-    var shell = options.shellPath;
+    const shell = options.shellPath;
     if (!shell) {
         cb("Shell path must be set.");
         return;
     }
 
-    var args = options.shellArgs || [];
-    var term = pty.spawn(shell, args, {
+    const args = options.shellArgs || [];
+    const term = pty.spawn(shell, args, {
         name: "xterm-256color",
         cols: options.cols || 80,
         rows: options.rows || 24,
         cwd: options.projectRoot || process.env.PWD,
-        env: process.env
+        env: process.env as any
     });
 
     terminals[term.pid] = term;
@@ -30,23 +28,23 @@ function cmdCreateTerminal(options, cb) {
 }
 
 function cmdResize(termId, cols, rows) {
-    var term = terminals[termId];
+    const term = terminals[termId];
     term.resize(cols, rows);
 }
 
 function cmdMessage(termId, message) {
-    var term = terminals[termId];
+    const term = terminals[termId];
     term.write(message);
 }
 
 function cmdClose(termId) {
-    var term = terminals[termId];
+    const term = terminals[termId];
     // Clean things up
     delete terminals[term.pid];
     term.kill();
 }
 
-function init(domainManager) {
+export function init(domainManager) {
     if (!domainManager.hasDomain("terminals")) {
         domainManager.registerDomain("terminals", {major: 0, minor: 1});
     }
@@ -150,5 +148,3 @@ function init(domainManager) {
             }
         ]);
 }
-
-exports.init = init;

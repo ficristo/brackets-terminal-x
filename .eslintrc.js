@@ -11,7 +11,17 @@ module.exports = {
             "globals": {
                 "$": false,
                 "brackets": false,
-                "define": false
+                "define": false,
+                "require": false,
+                "module": false
+            }
+        },
+        {
+            "files": [
+                "src/node/**"
+            ],
+            "env": {
+                "node": true
             }
         }
     ]

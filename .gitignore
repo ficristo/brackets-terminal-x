@@ -2,6 +2,7 @@
 node_modules
 
 # Avoid to commit the "distribution"...
+/dist
 brackets-terminal-x.*
 
 # Useful for developing

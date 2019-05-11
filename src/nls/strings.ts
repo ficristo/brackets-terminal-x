@@ -1,0 +1,3 @@
+export = {
+    root: true
+};

@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.base",
+    "compilerOptions": {
+        "module": "commonjs",
+        "moduleResolution": "node"
+    },
+    "include": [
+        "./**/*",
+        "../../node_modules/@types/node",
+        "../../typings"
+    ],
+    "exclude": [
+        "../../node_modules"
+    ]
+}
