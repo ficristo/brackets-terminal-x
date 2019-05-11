@@ -28,29 +28,29 @@ define(function (require, exports, module) {
 
     function handleAction(action) {
         switch (action) {
-        case "check":
-            commandShow.setChecked(true);
-            break;
-        case "uncheck":
-            commandShow.setChecked(false);
-            break;
-        case "show":
-            panel.show();
-            commandShow.setChecked(true);
-            break;
-        case "hide":
-            panel.hide();
-            commandShow.setChecked(false);
-            break;
-        case "toggle":
-        default:
-            if (panel.isVisible()) {
-                panel.hide();
+            case "check":
+                commandShow.setChecked(true);
+                break;
+            case "uncheck":
                 commandShow.setChecked(false);
-            } else {
+                break;
+            case "show":
                 panel.show();
                 commandShow.setChecked(true);
-            }
+                break;
+            case "hide":
+                panel.hide();
+                commandShow.setChecked(false);
+                break;
+            case "toggle":
+            default:
+                if (panel.isVisible()) {
+                    panel.hide();
+                    commandShow.setChecked(false);
+                } else {
+                    panel.show();
+                    commandShow.setChecked(true);
+                }
         }
     }
 
@@ -87,7 +87,7 @@ define(function (require, exports, module) {
             var doc = DocumentManager.getCurrentDocument();
             var fullPath = doc.file.fullPath;
             var binary = getBinary(doc.language);
-            binary = !!binary ? binary + " " : "";
+            binary = binary ? binary + " " : "";
             manager.run(binary + fullPath);
         });
     }

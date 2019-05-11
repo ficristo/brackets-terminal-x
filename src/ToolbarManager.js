@@ -6,6 +6,7 @@ define(function (require, exports, module) {
         terminalIconHtml = require("text!src/views/terminal-icon.html");
 
     function Manager() {
+        // Do nothing.
     }
     EventDispatcher.makeEventDispatcher(Manager.prototype);
 
