@@ -20,6 +20,7 @@
     "brackets": "^1.11.0"
   },
   "scripts": {
+    "build": "rollup -c rollup.config.ts",
     "dev": "tsc --project tsconfig.json && tsc --project src/node/tsconfig.json",
     "lint:js": "eslint . --ignore-path .gitignore --ext=js,ts",
     "lint": "npm run lint:js",
@@ -31,7 +32,7 @@
   },
   "dependencies": {
     "node-pty-prebuilt": "^0.7.6",
-    "xterm": "2.9.2"
+    "xterm": "^3.13.0"
   },
   "devDependencies": {
     "@types/jquery": "^2.0.53",
@@ -41,6 +42,11 @@
     "eslint": "^5.16.0",
     "eslint-config-moody-tsx": "^0.6.0",
     "husky": "0.14.3",
+    "rollup": "^1.11.3",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-node-resolve": "^4.2.4",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.21.0",
     "typescript": "~3.5.2"
   }
 }

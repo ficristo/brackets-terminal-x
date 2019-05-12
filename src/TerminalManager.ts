@@ -1,17 +1,16 @@
-import module = require("module");
+import * as module from "module";
 
 const ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
 const EventDispatcher = brackets.getModule("utils/EventDispatcher");
 const NodeDomain = brackets.getModule("utils/NodeDomain");
 const terminalsDomain = new NodeDomain("terminals", ExtensionUtils.getModulePath(module, "node/TerminalsDomain"));
 
-import Terminal = require("../node_modules/xterm/dist/xterm");
+import { Terminal } from "xterm";
+import * as fitAddon from "xterm/lib/addons/fit/fit";
 
 const EOL = brackets.platform === "win" ? "\r\n" : "\n";
 
-(require as unknown as Require)([
-    "../node_modules/xterm/dist/addons/fit/fit"
-]);
+Terminal.applyAddon(fitAddon);
 
 function Manager(this: any) {
     const self = this;
@@ -159,4 +158,4 @@ Manager.prototype.hasTerminals = function () {
 };
 
 const manager = new Manager();
-export = manager;
+export default manager;

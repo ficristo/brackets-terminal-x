@@ -4,7 +4,7 @@
         "noImplicitAny": false,
         "jsx": "react",
         "baseUrl": ".",
-        "rootDir": "./src",
+        "rootDir": ".",
         "sourceMap": true,
         "target": "es5",
         "skipLibCheck": true,

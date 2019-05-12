@@ -327,9 +327,9 @@
       "resolved": "https://registry.npmjs.org/xtend/-/xtend-4.0.1.tgz"
     },
     "xterm": {
-      "version": "2.9.2",
-      "from": "xterm@2.9.2",
-      "resolved": "https://registry.npmjs.org/xterm/-/xterm-2.9.2.tgz"
+      "version": "3.13.0",
+      "from": "xterm@>=3.13.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/xterm/-/xterm-3.13.0.tgz"
     }
   }
 }

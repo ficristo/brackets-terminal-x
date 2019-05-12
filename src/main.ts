@@ -1,4 +1,4 @@
-import module = require("module");
+import * as module from "module";
 
 const AppInit = brackets.getModule("utils/AppInit");
 const ExtensionUtils = brackets.getModule("utils/ExtensionUtils");
@@ -9,13 +9,13 @@ const CommandManager = brackets.getModule("command/CommandManager");
 const Menus = brackets.getModule("command/Menus");
 const DocumentManager = brackets.getModule("document/DocumentManager");
 const EditorManager = brackets.getModule("editor/EditorManager");
-import manager = require("./TerminalManager");
-import toolbar = require("./ToolbarManager");
-import Preferences = require("./Preferences");
-import Strings = require("./strings");
-import terminalsPanelHtml = require("text!./views/terminals-panel.html");
-import terminalHeaderHtml = require("text!./views/terminal-header.html");
-import terminalContentHtml = require("text!./views/terminal-content.html");
+import manager from "./TerminalManager";
+import toolbar from "./ToolbarManager";
+import * as Preferences from "./Preferences";
+import Strings from "./strings";
+import * as terminalsPanelHtml from "text!./views/terminals-panel.html";
+import * as terminalHeaderHtml from "text!./views/terminal-header.html";
+import * as terminalContentHtml from "text!./views/terminal-content.html";
 const PANEL_ID = "brackets-terminal-x";
 let commandShow;
 
@@ -195,9 +195,9 @@ AppInit.appReady(function () {
 
         const $html = $(html);
         $html.addClass("active");
+        $terminalsContainer.append($html);
         manager.open($html.get()[0], termId);
 
-        $terminalsContainer.append($html);
         manager.setCurrentTermId(termId);
         manager.resizeCurrentTerm();
 

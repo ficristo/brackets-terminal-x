@@ -1,5 +1,5 @@
 const PreferencesManager = brackets.getModule("preferences/PreferencesManager");
-import Strings = require("./strings");
+import Strings from "./strings";
 export const prefs = PreferencesManager.getExtensionPrefs("brackets-terminal-x");
 
 // Default preference values.

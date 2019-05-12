@@ -1,0 +1,10 @@
+{
+    "paths": {},
+    "packages": [
+        {
+            "name": "xterm",
+            "location": "./node_modules/xterm",
+            "main": "dist/xterm"
+        }
+    ]
+}

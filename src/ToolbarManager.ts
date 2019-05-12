@@ -1,6 +1,6 @@
 const EventDispatcher = brackets.getModule("utils/EventDispatcher");
 const Mustache = brackets.getModule("thirdparty/mustache/mustache");
-import terminalIconHtml = require("text!./views/terminal-icon.html");
+import * as terminalIconHtml from "text!./views/terminal-icon.html";
 
 function Manager() {
     // Do nothing.
@@ -20,4 +20,4 @@ Manager.prototype.createIcon = function () {
 };
 
 const manager = new Manager();
-export = manager;
+export default manager;
