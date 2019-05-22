@@ -84,7 +84,11 @@
 */
 #terminals-container .tab-pane {
     height: 100%;
+}
+
+#terminals-container .xterm {
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 #brackets-terminal-x-icon {
