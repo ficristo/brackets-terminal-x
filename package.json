@@ -20,7 +20,7 @@
     "brackets": "^1.11.0"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.ts",
+    "build": "rollup -c rollup.config.js",
     "dev": "tsc --project tsconfig.json && tsc --project src/node/tsconfig.json",
     "lint:js": "eslint . --ignore-path .gitignore --ext=js,ts",
     "lint": "npm run lint:js",

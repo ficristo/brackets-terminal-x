@@ -23,6 +23,15 @@ module.exports = {
             "env": {
                 "node": true
             }
+        },
+        {
+            "files": [
+                "rollup.config.js"
+            ],
+            "parserOptions": {
+                "ecmaVersion": 6,
+                "sourceType": "module"
+            }
         }
     ]
 }
