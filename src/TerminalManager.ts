@@ -27,15 +27,16 @@ Manager.prototype.createTerminal = function (options) {
     const self = this;
     self._terminals = self._terminals || {};
 
-    options = options || {
+    const shellOptions = options.shell || {
         cols: null,
         rows: null,
         projectRoot: null,
         shellPath: null
     };
-    terminalsDomain.exec("createTerminal", options)
+    const terminalOptions = options.terminal;
+    terminalsDomain.exec("createTerminal", shellOptions)
         .done(function (termId) {
-            self._newTerminal(termId);
+            self._newTerminal(termId, terminalOptions);
             self.trigger("created", termId);
         })
         .fail(function (err) {
@@ -43,11 +44,11 @@ Manager.prototype.createTerminal = function (options) {
         });
 };
 
-Manager.prototype._newTerminal = function (termId) {
+Manager.prototype._newTerminal = function (termId, options) {
     const self = this;
-    const term = new Terminal({
-        cursorBlink: true
-    });
+    options = options || {};
+    options.cursorBlink = true;
+    const term = new Terminal(options);
     self._terminals[termId] = term;
     self._currentTermId = termId;
 

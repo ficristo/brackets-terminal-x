@@ -69,6 +69,16 @@ prefs.definePreference(
 );
 
 prefs.definePreference(
+    "rendererType",
+    "string",
+    "dom",
+    {
+        name: "Controls how the terminal is rendered",
+        description: Strings.DESCRIPTION_TERMINAL_RENDERER_TYPE
+    }
+);
+
+prefs.definePreference(
     "binaries",
     "object",
     {

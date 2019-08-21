@@ -62,12 +62,18 @@ function getProjectPath() {
 
 function getOptions() {
     const shellPrefs = Preferences.getShell();
+    const prefs = Preferences.prefs;
     const options = {
-        cols: null,
-        rows: null,
-        projectRoot: getProjectPath(),
-        shellPath: shellPrefs.shellPath,
-        shellArgs: shellPrefs.shellArgs
+        shell: {
+            cols: null,
+            rows: null,
+            projectRoot: getProjectPath(),
+            shellPath: shellPrefs.shellPath,
+            shellArgs: shellPrefs.shellArgs
+        },
+        terminal: {
+            rendererType: prefs.get("rendererType")
+        }
     };
     return options;
 }

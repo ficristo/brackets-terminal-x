@@ -8,6 +8,9 @@ export const DESCRIPTION_TERMINAL_SHELL_MAC = "Path to the shell used on macOS";
 export const DESCRIPTION_TERMINAL_SHELLARGS_MAC = "Arguments to pass to the shell when launched on macOS";
 export const DESCRIPTION_TERMINAL_SHELL_LINUX = "Path to the shell used on Linux";
 export const DESCRIPTION_TERMINAL_SHELLARGS_LINUX = "Arguments to pass to the shell when launched on Linux";
+
+export const DESCRIPTION_TERMINAL_RENDERER_TYPE = "Controls how the terminal is rendered";
+
 export const DESCRIPTION_BINARY = "Mapping of binary to use to run a script";
 
 export const CMD_CLEAR = "Clear current terminal";
