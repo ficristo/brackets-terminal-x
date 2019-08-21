@@ -35,9 +35,9 @@
     "xterm": "^3.14.2"
   },
   "devDependencies": {
-    "@types/jquery": "^2.0.53",
+    "@types/jquery": "^2.0.54",
     "@types/mustache": "^0.8.32",
-    "@types/node": "^6.14.6",
+    "@types/node": "^6.14.7",
     "@types/requirejs": "^2.1.31",
     "eslint": "^5.16.0",
     "eslint-config-moody-tsx": "^0.7.0",
