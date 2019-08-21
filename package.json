@@ -40,7 +40,7 @@
     "@types/node": "^6.14.6",
     "@types/requirejs": "^2.1.31",
     "eslint": "^5.16.0",
-    "eslint-config-moody-tsx": "^0.6.0",
+    "eslint-config-moody-tsx": "^0.7.0",
     "husky": "0.14.3",
     "rollup": "^1.11.3",
     "rollup-plugin-commonjs": "^9.3.4",
