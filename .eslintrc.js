@@ -26,7 +26,8 @@ module.exports = {
         },
         {
             "files": [
-                "rollup.config.js"
+                "rollup.config.js",
+                "build/**"
             ],
             "parserOptions": {
                 "ecmaVersion": 6,

@@ -21,14 +21,13 @@
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "dev": "tsc --project tsconfig.json && tsc --project src/node/tsconfig.json",
     "lint:js": "eslint . --ignore-path .gitignore --ext=js,ts",
     "lint": "npm run lint:js",
     "prepush": "npm run test",
     "test": "npm run lint",
-    "dist": "npm run dev && npm run test",
-    "preversion": "npm run dist",
-    "postversion": "git push && git push --tags"
+    "preversion": "npm run test",
+    "postversion": "git push && git push --tags",
+    "dist": "node build/zip"
   },
   "dependencies": {
     "node-pty-prebuilt": "^0.7.6",
@@ -39,6 +38,7 @@
     "@types/mustache": "^0.8.32",
     "@types/node": "^6.14.7",
     "@types/requirejs": "^2.1.31",
+    "archiver": "^3.1.1",
     "eslint": "^5.16.0",
     "eslint-config-moody-tsx": "^0.7.0",
     "husky": "0.14.3",
