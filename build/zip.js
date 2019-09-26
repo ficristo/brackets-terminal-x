@@ -2,7 +2,16 @@ const fs = require("fs");
 const archiver = require("archiver");
 const pkg = require("../package.json");
 
-const output = fs.createWriteStream(pkg.name + ".zip");
+const zipName = pkg.name + ".zip";
+try {
+    fs.unlinkSync(zipName);
+} catch (err) {
+    if (err.code !== "ENOENT") {
+        throw err;
+    }
+}
+
+const output = fs.createWriteStream(zipName);
 const archive = archiver("zip", {
     zlib: { level: 9 }
 });
