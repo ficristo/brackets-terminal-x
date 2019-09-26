@@ -1,6 +1,6 @@
 import * as pty from "node-pty-prebuilt";
 
-const terminals = {};
+const terminals: { [pid: number]: pty.IPty } = {};
 let gDomainManager;
 
 function cmdCreateTerminal(options, cb) {
@@ -22,6 +22,9 @@ function cmdCreateTerminal(options, cb) {
     terminals[term.pid] = term;
     term.on("data", function (data) {
         gDomainManager.emitEvent("terminals", "data", [term.pid, data]);
+    });
+    term.on("exit", function (code) {
+        gDomainManager.emitEvent("terminals", "exit", [term.pid, code]);
     });
 
     cb(null, term.pid);
@@ -145,6 +148,22 @@ export function init(domainManager) {
                 name: "message",
                 type: "string",
                 description: "The message"
+            }
+        ]);
+
+    domainManager.registerEvent(
+        "terminals",        // domain name
+        "exit",             // event name
+        [
+            {
+                name: "pid",
+                type: "number",
+                description: "The id of the spawned terminal"
+            },
+            {
+                name: "exit",
+                type: "number",
+                description: "The exit code"
             }
         ]);
 }

@@ -17,6 +17,9 @@ function Manager(this: any) {
     terminalsDomain.on("data", function (event, termId, data) {
         self._terminals[termId].write(data);
     });
+    terminalsDomain.on("exit", function (event, termId, exitCode) {
+        console.error("[brackets-terminal-x] pty exited with code: ", exitCode);
+    });
 }
 EventDispatcher.makeEventDispatcher(Manager.prototype);
 
@@ -49,6 +52,9 @@ Manager.prototype._newTerminal = function (termId, options) {
     options = options || {};
     options.cursorBlink = true;
     const term = new Terminal(options);
+    if (brackets.platform === "win") {
+        term.setOption("windowsMode", true);
+    }
     self._terminals[termId] = term;
     self._currentTermId = termId;
 

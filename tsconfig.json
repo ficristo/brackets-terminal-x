@@ -13,7 +13,7 @@
         "./**/*",
         "./node_modules/xterm",
         "./node_modules/xterm/typings/*",
-        "./node_modules/xterm/lib/addons/fit/*",
+        "./node_modules/xterm/lib/addons/fit/*"
     ],
     "exclude": [
         "node_modules/!xterm"
