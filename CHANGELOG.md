@@ -1,4 +1,17 @@
-## v0.6.0 (2017-06-11)
+## v1.0.0 (2019-09-29)
+
+Add rendererType preference.
+
+Use node-pty-prebuilt to avoid a c++ compiler.
+
+Convert to TypeScript.
+
+Upgrade deps.
+
+Remove mention to brackets-electron because unmaintained.
+
+
+## v0.6.0 (2018-01-05)
 
 Remove websocket usage and instead rely on Brackets api.
 
