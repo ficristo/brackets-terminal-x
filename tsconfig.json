@@ -1,0 +1,21 @@
+{
+    "extends": "./tsconfig.base",
+    "compilerOptions": {
+        "module": "es2015",
+        "baseUrl": "dist",
+        "paths": {
+            "xterm/*": [
+                "../node_modules/xterm/*"
+            ]
+        }
+    },
+    "include": [
+        "./**/*",
+        "./node_modules/xterm",
+        "./node_modules/xterm/typings/*",
+        "./node_modules/xterm/lib/addons/fit/*"
+    ],
+    "exclude": [
+        "node_modules/!xterm"
+    ]
+}
