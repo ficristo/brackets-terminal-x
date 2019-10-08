@@ -7,13 +7,15 @@ Brackets extension to integrate the terminal of your choice.
 
 ## Requirements
 
-Since v1.0.0 you shouldn't need anything.
+If you want to install the extension manually you need to install Node.js version 6.
+Otherwise since v1.0.0 you shouldn't need anything.
 In earlier versions you needed a C++ compiler installed to your computer.
 
 
 ## How to install
 
-Since Brackets 1.11 it is possible to install directly from the Extension Manager on all platforms.
+Because of https://github.com/adobe/brackets/issues/13312 the latest version is not available in the registry.
+To get it you have to install it manually.
 It could take a while to be installed, be patient.
 
 ### Installing manually
